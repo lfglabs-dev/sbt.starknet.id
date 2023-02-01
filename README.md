@@ -1,38 +1,15 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<h1 align="center">
+  <br>
+  <img src="https://www.starknet.id/visuals/StarknetIdLogo.png" alt="Starknet.id" width="256">
+  <br>
+  SBT Maker
+</h1>
 
-## Getting Started
+<h4 align="center">👷 Create your own SBT in 30 seconds</h4>
 
-First, run the development server:
+## What is a SBT?
+A SBT is a non transferable token. It can be used to represent something about you of what you did. For example if you participated to the Tel Aviv Starknet hacker house of 2023 you may have claimed your POAP, that you can showcase on your starknet.id profile.
+![screenshot](./screenshot.webp)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Who is it for?
+If you are organizing an event and want to reward the participants, you can use this simple tool. It will ask you to chose a password and a maximum date of mint. Share this password to your participants so they can mint their SBT. Even if someone looks at the chain transactions, if he doesn't know the password, he won't be able to mint one.
