@@ -1,6 +1,4 @@
 import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from '@next/font/google'
 import styles from '@/styles/Home.module.css'
 import React, { useState, FunctionComponent, useEffect } from "react";
 import { useConnectors, useAccount, useStarknet } from "@starknet-react/core";
@@ -17,7 +15,7 @@ export default function Home() {
   const { available, connect, disconnect } = useConnectors();
 
   const domain = useUpdatedDomainFromAddress(address);
-
+  const displayname = useMinified(domain ? domain : address ?? "");
   function disconnectByClick(): void {
     disconnect();
     setIsWrongNetwork(false);
@@ -46,9 +44,7 @@ export default function Home() {
           {address ? (
 
             <div>
-              {domain
-                ? useMinified(domain)
-                : useMinified(address ?? "")}
+              {displayname}
             </div>
 
           ) : (
