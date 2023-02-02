@@ -1,0 +1,47 @@
+.title {
+    text-align: center;
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.line {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.line * {
+    margin: 5px 10px;
+}
+
+.line p {
+    width:  100%;
+    text-align: right;
+    font-weight: bold;
+}
+
+.inputContainer {
+    width: 100%;
+}
+
+.line input, .line label {
+    width: 200px;
+}
+
+.nextButton {
+    background-color: var(--green);
+    border: none;
+    border-radius: .5em;
+    padding: .4em 1em;
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    cursor: pointer;
+    color: var(--beige);
+}
