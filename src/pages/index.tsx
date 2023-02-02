@@ -1,21 +1,41 @@
 import Head from 'next/head'
 import styles from '@/styles/Home.module.css'
-import React, { useState, FunctionComponent, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useConnectors, useAccount, useStarknet } from "@starknet-react/core";
-import { useMinified, useUpdatedDomainFromAddress } from '@/hooks/displayname';
-
+import { useDisplayName } from '@/hooks/displayname';
+import WalletSelector from '@/components/connection/walletSelector';
 export default function Home() {
 
   // connection
-  const [hasWallet, setHasWallet] = useState<boolean>(true);
+  const [showWalletSelector, setShowWalletSelector] = useState<boolean>(false);
   const [isWrongNetwork, setIsWrongNetwork] = useState(false);
 
   // starknet-react
   const { address } = useAccount();
   const { available, connect, disconnect } = useConnectors();
+  const displayname = useDisplayName(address);
+  const { library } = useStarknet();
 
-  const domain = useUpdatedDomainFromAddress(address);
-  const displayname = useMinified(domain ? domain : address ?? "");
+  useEffect(() => {
+    if (!address) return;
+
+    const STARKNET_NETWORK = {
+      mainnet: "0x534e5f4d41494e",
+      testnet: "0x534e5f474f45524c49",
+    };
+
+    if (library.chainId === STARKNET_NETWORK.testnet && process.env.NEXT_PUBLIC_NETWORK === "mainnet") {
+      setIsWrongNetwork(true);
+    } else if (
+      library.chainId === STARKNET_NETWORK.mainnet &&
+      process.env.network === "testnet"
+    ) {
+      setIsWrongNetwork(true);
+    } else {
+      setIsWrongNetwork(false);
+    }
+  }, [library, address]);
+
   function disconnectByClick(): void {
     disconnect();
     setIsWrongNetwork(false);
@@ -31,28 +51,20 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-
         <button
           onClick={
             address
               ? () => disconnectByClick()
               : available.length === 1
                 ? () => connect(available[0])
-                : () => setHasWallet(true)
-          }
-        >
-          {address ? (
-
-            <div>
-              {displayname}
-            </div>
-
-          ) : (
-            "connect"
-          )}
+                : () => setShowWalletSelector(true)}>
+          {address ? displayname : "connect"}
         </button>
-
-
+        {isWrongNetwork
+          ? <div>wrong network</div>
+          : showWalletSelector
+            ? <WalletSelector closeWalletSelector={() => setShowWalletSelector(false)} />
+            : <></>}
       </main>
     </>
   )
