@@ -14,15 +14,20 @@
     "@types/node": "18.11.18",
     "@types/react": "18.0.27",
     "@types/react-dom": "18.0.10",
+    "axios": "^1.3.1",
     "bn.js": "^5.2.1",
     "eslint": "8.33.0",
     "eslint-config-next": "13.1.6",
+    "formidable": "^2.1.1",
+    "mime": "^3.0.0",
     "next": "13.1.6",
+    "nft.storage": "^7.0.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "typescript": "4.9.5"
   },
   "devDependencies": {
-    "@types/bn.js": "^5.1.1"
+    "@types/bn.js": "^5.1.1",
+    "@types/formidable": "^2.0.5"
   }
 }
