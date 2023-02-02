@@ -6,6 +6,7 @@
 
 :root {
   --green     : #19aa6e;
+  --lightgreen: #24bd7d;
   --brown     : #402d28;
   --soft-brown: #bf9e7b;
   --beige     : #fff9f0;
@@ -20,6 +21,12 @@
   @font-face {
     font-family: "Montserrat-SemiBold";
     src        : url(../../public/fonts/montserrat/Montserrat-SemiBold.ttf);
+  }
+
+
+  @font-face {
+    font-family: "Montserrat-Medium";
+    src        : url(../../public/fonts/montserrat/Montserrat-Medium.ttf);
   }
 
   @font-face {

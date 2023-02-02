@@ -1,5 +1,6 @@
 import React from "react";
 import { FunctionComponent } from "react";
+import styles from '@/styles/components/connection/WalletSelector.module.css'
 
 type WalletIconsProps = {
   id: string;
@@ -9,7 +10,7 @@ const WalletIcons: FunctionComponent<WalletIconsProps> = ({ id }) => {
   if (id === "argentX")
     return (
       <svg
-        className={"styles.button_icon"}
+        className={styles.button_icon}
         fill="currentColor"
         viewBox="0 0 40 36"
         xmlns="http://www.w3.org/2000/svg"
@@ -24,7 +25,7 @@ const WalletIcons: FunctionComponent<WalletIconsProps> = ({ id }) => {
         viewBox="0 0 100 100"
         fill="currentColor"
         xmlns="http://www.w3.org/2000/svg"
-        className={"styles.button_icon"}
+        className={styles.button_icon}
       >
         <path d="M62.705 13.9116C62.8359 14.1333 62.6621 14.407 62.4039 14.407C57.1807 14.407 52.9348 18.5427 52.8351 23.6817C51.0465 23.3477 49.1933 23.3226 47.3626 23.6311C47.2361 18.5156 43.0009 14.407 37.7948 14.407C37.5365 14.407 37.3625 14.1331 37.4935 13.9112C40.0217 9.62809 44.7204 6.75 50.0991 6.75C55.4781 6.75 60.1769 9.62826 62.705 13.9116Z" />
         <path d="M78.7606 45.8718C80.2725 46.3297 81.7025 45.0055 81.1714 43.5222C76.4137 30.2334 61.3911 24.8039 50.0277 24.8039C38.6442 24.8039 23.2868 30.407 18.8754 43.5912C18.3824 45.0645 19.8083 46.3446 21.2978 45.8881L48.872 37.4381C49.5331 37.2355 50.2399 37.2344 50.9017 37.4348L78.7606 45.8718Z" />
@@ -34,7 +35,7 @@ const WalletIcons: FunctionComponent<WalletIconsProps> = ({ id }) => {
 
   return (
     <svg
-      className={"styles.button_icon"}
+      className={styles.button_icon}
       fill="currentColor"
       viewBox="0 0 20 20"
       xmlns="http://www.w3.org/2000/svg"
