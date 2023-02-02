@@ -1,0 +1,51 @@
+.page {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.form {
+  position: relative;
+  background-color: var(--light-soft-brown);
+  width: 600px;
+  height: 300px;
+  border-radius: .7em;
+}
+
+.title {
+  margin: 0;
+  font-size: 4em;
+  text-align: center;
+}
+
+.homeButton {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+}
+
+.blur {
+  filter: blur(5px);
+}
+
+.leaf1 {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  transform: rotate(-90deg);
+  width: 300px;
+}
+
+.leaf2 {
+  position: fixed;
+  right: 0;
+  top: 0;
+  transform: rotate(180deg);
+  width: 250px;
+}

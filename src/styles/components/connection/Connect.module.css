@@ -6,6 +6,10 @@
     border          : none;
     color           : white;
     background-color: var(--green);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .button:hover {
