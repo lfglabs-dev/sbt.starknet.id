@@ -1,0 +1,66 @@
+.box {
+    position        : absolute;
+    left            : 50%;
+    top             : 50%;
+    transform       : translate(-50%, -50%);
+    border-radius   : 20px;
+    padding         : 45px;
+    max-width       : 500px;
+    display         : flex;
+    flex-direction  : column;
+    z-index         : 1000;
+    background-color: var(--beige);
+    display         : flex;
+    justify-content : center;
+    align-items     : center;
+}
+
+.overlay {
+    position                   : fixed;
+    display                    : flex;
+    -webkit-box-align          : center;
+    align-items                : center;
+    -webkit-box-pack           : center;
+    justify-content            : center;
+    inset                      : 0px;
+    background-color           : rgba(0, 0, 0, 0.5);
+    -webkit-tap-highlight-color: transparent;
+    z-index                    : -1;
+}
+
+.title {
+    font-family  : "Montserrat-ExtraBold";
+    margin-bottom: 18px;
+    font-size    : 24px;
+    color        : var(--brown);
+}
+
+.wallet_button {
+    width           : 215px;
+    cursor          : pointer;
+    display         : flex;
+    align-items     : baseline;
+    justify-content : space-between;
+    align-items     : center;
+    margin          : 6px 4px;
+    padding         : 6px;
+    border-radius   : 12px;
+    border          : none;
+    background-color: var(--green);
+    color           : white;
+}
+
+.wallet_button:hover {
+    background-color: var(--lightgreen);
+}
+
+.wallet_buton_txt {
+    font-family : "Montserrat-Medium";
+    font-size   : 16px;
+    margin-right: 5px;
+}
+
+.button_icon {
+    height     : 24px;
+    margin-left: 6px;
+}
