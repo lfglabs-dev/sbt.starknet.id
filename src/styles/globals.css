@@ -35,6 +35,6 @@
   }
 }
 
-h2, p, label {
+html, body, h2, p, label {
   font-family: "Montserrat", sans-serif;
 }

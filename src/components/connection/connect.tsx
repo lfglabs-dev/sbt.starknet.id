@@ -3,6 +3,7 @@ import { useConnectors, useAccount, useStarknet } from "@starknet-react/core";
 import { useDisplayName } from '@/hooks/displayname';
 import WalletSelector from '@/components/connection/walletSelector';
 import styles from '@/styles/components/connection/Connect.module.css'
+import Button from "../UI/button";
 
 export default function Connect() {
 
@@ -43,15 +44,16 @@ export default function Connect() {
 
     return (
         <>
-            <button className={styles.button}
-                onClick={
+            <div className={styles.buttonContainer}>
+                <Button onClick={
                     address
                         ? () => disconnectByClick()
                         : available.length === 1
                             ? () => connect(available[0])
                             : () => setShowWalletSelector(true)}>
                 {address ? displayname : "connect"}
-            </button>
+                </Button>
+            </div>
             {isWrongNetwork
                 ? <div>wrong network</div>
                 : showWalletSelector
