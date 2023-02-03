@@ -8,7 +8,7 @@ import fs from "fs";
 import path from "path";
 
 import formidable from "formidable";
-import { NextApiRequest,NextApiResponse } from "next";
+import { NextApiRequest, NextApiResponse } from "next";
 
 /**
  * Reads an image file from `imagePath` and stores an NFT with the given name and description.
@@ -16,12 +16,12 @@ import { NextApiRequest,NextApiResponse } from "next";
  * @param {string} name a name for the NFT
  * @param {string} description a text description for the NFT
  */
-async function storeNFT(imagePath: String, name: String, description: String) {
+async function storeNFT(imagePath: string, name: string, description: string) {
   // load the file from disk
   const image = await fileFromPath(imagePath);
 
   // create a new NFTStorage client using our API key
-  const nftstorage = new NFTStorage({ token: process.env.NFT_STORAGE_API_KEY });
+  const nftstorage = new NFTStorage({ token: process.env.NFT_STORAGE_API_KEY as string });
 
   // call client.store, passing in the image & metadata
   return nftstorage.store({
@@ -38,7 +38,7 @@ async function storeNFT(imagePath: String, name: String, description: String) {
  * @param {string} filePath the path to a file to store
  * @returns {File} a File object containing the file content
  */
-async function fileFromPath(filePath: String) {
+async function fileFromPath(filePath: string) {
   const content = await fs.promises.readFile(filePath);
   const type = "image/*";
   return new File([content], path.basename(filePath), { type });
@@ -58,20 +58,20 @@ export const config = {
   },
 };
 
-export default async function uploadToIpfs(req: NextApiRequest, res: NextApiResponse<{message: String, ipnft?:String, url?:String}>) {
+export default async function uploadToIpfs(req: NextApiRequest, res: NextApiResponse<{ message: string, ipnft?: string, url?: string }>) {
   const form = formidable({ multiples: true });
 
   form.parse(req, async (err, fields, files) => {
     let filesArr = Object.entries(files);
-    if(filesArr.length == 0) {
-      res.status(400).send({message:"Please send a file"});
+    if (filesArr.length == 0) {
+      res.status(400).send({ message: "Please send a file" });
       return;
-    } else if(filesArr.length > 1) {
-      res.status(400).send({message:"Only one file upload is allowed"});
+    } else if (filesArr.length > 1) {
+      res.status(400).send({ message: "Only one file upload is allowed" });
       return;
     }
-    let file = filesArr[0][1];
-    let result = await storeNFT(file.filepath, fields.name, fields.desc);
-    res.status(200).send({message:"Success",hash:result.ipnft,url:`https://ipfs.io/ipfs/${result.ipnft}/metadata.json`});
+    let file = (filesArr[0][1] as formidable.File);
+    let result = await storeNFT(file.filepath, fields.name as string, fields.desc as string);
+    res.status(200).send({ message: "Success", ipnft: result.ipnft, url: `https://ipfs.io/ipfs/${result.ipnft}/metadata.json` });
   });
 }
