@@ -35,6 +35,16 @@
     width: 200px;
 }
 
+@media screen and (max-width: 620px) {
+    .line p {
+        width: 100%;
+        text-align: center;
+    }
+    .line input, .line label {
+        width: calc(100% - 15px);
+    }
+}
+
 .nextButton {
     background-color: var(--green);
     border: none;
