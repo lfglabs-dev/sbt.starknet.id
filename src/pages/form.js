@@ -8,7 +8,10 @@ export default function Document() {
     formData.append("file", document.getElementById('image').files[0]);
     formData.append("name", document.getElementById('name').value);
     formData.append("desc", document.getElementById('desc').value);
-    await axios.post('/api/nft_storage', formData);
+    await fetch('/api/nft_storage', {
+      method: 'post',
+      body: formData
+    })
   };
   return (
     <form
