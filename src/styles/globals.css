@@ -9,6 +9,7 @@
   --lightgreen: #24bd7d;
   --brown     : #402d28;
   --soft-brown: #bf9e7b;
+  --light-soft-brown: #F2DDBD;
   --beige     : #fff9f0;
 }
 
@@ -23,7 +24,6 @@
     src        : url(../../public/fonts/montserrat/Montserrat-SemiBold.ttf);
   }
 
-
   @font-face {
     font-family: "Montserrat-Medium";
     src        : url(../../public/fonts/montserrat/Montserrat-Medium.ttf);
@@ -33,4 +33,8 @@
     font-family: "Montserrat-Regular";
     src        : url(../../public/fonts/montserrat/Montserrat-Regular.ttf);
   }
+}
+
+h2, p, label {
+  font-family: "Montserrat", sans-serif;
 }
