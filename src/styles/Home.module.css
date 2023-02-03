@@ -16,6 +16,18 @@
   width: 600px;
   height: 300px;
   border-radius: .7em;
+  display: flex;
+}
+
+.formSideImage {
+  width: 300px;
+  height: 100%;
+  background-color: var(--brown);
+  border-radius: .7em;
+}
+
+.formFields {
+
 }
 
 .title {
@@ -51,4 +63,34 @@
   top: 0;
   transform: rotate(180deg);
   width: 250px;
+}
+
+@media screen and (max-width: 640px) {
+  .form {
+    width: 100vw;
+    height: 540px;
+    border-radius: 0;
+    flex-wrap: wrap;
+  }
+  .formSideImage {
+    width: 100vw;
+    height: 250px;
+  }
+  .formFields {
+    width: 100vw;
+    height: 300px;
+  }
+  .leaf1 {
+    width: 150px;
+  }
+  .leaf2 {
+    position: fixed;
+    right: 0;
+    top: 0;
+    transform: rotate(180deg);
+    width: 130px;
+  }
+  .homeButton {
+    display: none;
+  }
 }
