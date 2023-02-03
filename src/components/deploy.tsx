@@ -1,9 +1,11 @@
 import styles from '@/styles/components/Steps.module.css'
+import TextField from './UI/textField'
 import { useAccount, useStarknetExecute } from '@starknet-react/core'
 import BN from 'bn.js'
 import { useEffect, useState } from 'react'
 import { ec } from 'starknet'
 import { stringToFelt } from '../../utils/felt'
+import Button from './UI/button'
 
 interface DeployProps {
     tokenURI: string
@@ -67,20 +69,9 @@ export default function Deploy({ tokenURI }: DeployProps) {
     }
 
     return <>
-        <h2 className={styles.title}>Deploy</h2>
         <div className={styles.list}>
-            <div className={styles.line}>
-                <p>Admin</p>
-                <div className={styles.inputContainer}>
-                    <input className={styles.input} type="text" defaultValue={address} />
-                </div>
-            </div>
-            <div className={styles.line}>
-                <p>Poap password</p>
-                <div className={styles.inputContainer}>
-                    <input onChange={(e) => setPassword(e.target.value)} className={styles.input} type="password" />
-                </div>
-            </div>
+            <TextField className={styles.textField} label='Admin' defaultValue={address} />
+            <TextField className={styles.textField} label='Poap password' onChange={(e) => setPassword(e.target.value)} />
             <div className={styles.line}>
                 <p>Max mint date</p>
                 <div className={styles.inputContainer}>
@@ -88,8 +79,10 @@ export default function Deploy({ tokenURI }: DeployProps) {
                 </div>
             </div>
         </div>
-        <button onClick={handleDeploy} className={styles.nextButton}>
-            deploy
-        </button>
+        <div className={styles.nextButton}>
+            <Button onClick={handleDeploy}>
+                deploy
+            </Button>
+        </div>
     </>
 }

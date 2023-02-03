@@ -12,10 +12,14 @@
 
 .form {
   position: relative;
-  background-color: var(--light-soft-brown);
+  background-color: var(--beige);
   width: 600px;
-  height: 300px;
+  height: 350px;
   border-radius: .7em;
+}
+
+.formFields {
+  width: 100%;
 }
 
 .sidesContainer {
@@ -24,51 +28,29 @@
 }
 
 .formSideImage {
-  width: 256px;
+  width: 400px;
   height: 100%;
   background-color: var(--brown);
   border-radius: .7em;
 }
 
 .title {
-  margin: 0;
-  font-size: 4em;
+  margin: 10px 0;
+  font-size: 2em;
   text-align: center;
   font-family: "Montserrat-ExtraBold";
-  color: var(--green);
+  color: var(--brown);
   text-shadow: 4px 4px var(--soft-brown);
-}
-
-.homeButton {
-  position: absolute;
-  left: 10px;
-  top: 10px;
 }
 
 .blur {
   filter: blur(5px);
 }
 
-.leaf1 {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  transform: rotate(-90deg);
-  width: 300px;
-}
-
-.leaf2 {
-  position: fixed;
-  right: 0;
-  top: 0;
-  transform: rotate(180deg);
-  width: 250px;
-}
-
 @media screen and (max-width: 620px) {
   .form {
     width: 100vw;
-    height: 540px;
+    height: 600px;
     border-radius: 0;
   }
   .sidesContainer {
@@ -81,18 +63,5 @@
   .formFields {
     width: 100vw;
     height: 300px;
-  }
-  .leaf1 {
-    width: 150px;
-  }
-  .leaf2 {
-    position: fixed;
-    right: 0;
-    top: 0;
-    transform: rotate(180deg);
-    width: 130px;
-  }
-  .homeButton {
-    display: none;
   }
 }

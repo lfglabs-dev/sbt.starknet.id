@@ -3,7 +3,10 @@ import { useAccount } from '@starknet-react/core'
 import { ReactElement, useState } from 'react'
 import ErrorNotification from './notifications/errorNotification'
 import SuccessNotification from './notifications/successNotification copy'
+import Button from './UI/button'
 import Loading from './UI/loading'
+import TextField from './UI/textField'
+import buttonStyles from '@/styles/components/button.module.css'
 
 interface LookAndFeelProps {
     [key: string]: any,
@@ -12,6 +15,8 @@ interface LookAndFeelProps {
 }
 
 export default function LookAndFeel({ setTokenURI, setMenu, ...props }: LookAndFeelProps) {
+    const [name, setName] = useState<string>('')
+    const [desc, setDesc] = useState<string>('')
     const [element, setElement] = useState<ReactElement | null>(null)
     const { address } = useAccount()
     
@@ -22,19 +27,19 @@ export default function LookAndFeel({ setTokenURI, setMenu, ...props }: LookAndF
                 <Loading />
             </div>
         )
+        const nameInput = document.getElementById('name') as HTMLInputElement;
+        const name = nameInput.value;
+        if (!name) return error('Please enter a name for your poap')
+
+        const descInput = document.getElementById('description') as HTMLInputElement;
+        const desc = descInput.value;
+        if (!desc) return error('Please enter a description for your poap')
+
         const fileInput = document.getElementById('image') as HTMLInputElement;
         if (fileInput.files?.length !== 1) return error('Please select an image')
         // Check that the file is an image
         const file = fileInput.files[0];
         if (!file.type.startsWith('image/')) return error('The selected file is not an image')
-
-        const nameInput = document.getElementById('name') as HTMLInputElement;
-        const name = nameInput.value;
-        if (!name) return error('Please enter a name')
-
-        const descInput = document.getElementById('description') as HTMLInputElement;
-        const desc = descInput.value;
-        if (!desc) return error('Please enter a description')
 
         const formData = new FormData();
         formData.append("file", file);
@@ -57,34 +62,13 @@ export default function LookAndFeel({ setTokenURI, setMenu, ...props }: LookAndF
     }
 
     return <div {...props}>
-        <h2 className={styles.title}>Look and feel</h2>
         <div className={styles.list}>
-            <div className={styles.line}>
-                <p>Name</p>
-                <div className={styles.inputContainer}>
-                    <input id="name" className={styles.input} type="text" />
-                </div>
-            </div>
-            <div className={styles.line}>
-                <p>Description</p>
-                <div className={styles.inputContainer}>
-                    <input id="description" className={styles.input} type="text" />
-                </div>
-            </div>
-            <div className={styles.line}>
-                <p>Image</p>
-                <div className={styles.inputContainer}>
-                    <input onChange={(e) => {
-                        const label = document.querySelector('label[for="image"]') as HTMLLabelElement;
-                        label.innerText = e.target.files?.[0].name?.substring(0, 15) || 'Choose a file'
-                    }} className={styles.input} name='image' id="image" type="file" />
-                    <label htmlFor="image">Choose a file</label>
-                </div>
-            </div>
+            <TextField onChange={(e) => setName(e.target.value)} className={styles.textField} label='Name' id="name" />
+            <TextField onChange={(e) => setDesc(e.target.value)} className={styles.textField} label='Description' id="description" />
         </div>
-        <button onClick={handleNext} className={styles.nextButton}>
-            next
-        </button>
+        <br />
+        <input onChange={handleNext} className={styles.input} name='image' id="image" type="file" />
+        <label htmlFor="image">Choose an image</label>
         {element}
     </div>
 }

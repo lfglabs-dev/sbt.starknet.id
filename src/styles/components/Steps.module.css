@@ -1,8 +1,3 @@
-.title {
-    text-align: center;
-    margin: 10px 0;
-}
-
 .list {
     display: flex;
     flex-direction: column;
@@ -10,56 +5,41 @@
     justify-content: center;
 }
 
+.textField, .line {
+    margin: 10px;
+    width: calc(100% - 20px);
+}
+
 .line {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
 }
 
-.line * {
-    margin: 5px 10px;
-}
-
-.line p {
-    width:  100%;
-    text-align: right;
-    font-weight: bold;
+.line input, .line label {
+    margin-left: 10px;
+    width: calc(100% - 10px);
 }
 
 .inputContainer {
     width: 100%;
 }
 
-.line input, .line label {
-    width: 200px;
-}
-
 @media screen and (max-width: 620px) {
-    .line p {
-        width: 100%;
-        text-align: center;
-    }
     .line input, .line label {
         width: calc(100% - 15px);
     }
 }
 
 .nextButton {
-    background-color: var(--green);
-    border: none;
-    border-radius: .5em;
-    padding: .4em 1em;
-    position: absolute;
-    bottom: 15px;
-    right: 15px;
-    cursor: pointer;
-    color: var(--beige);
+    display: block;
+    margin: 0 auto;
+    width: fit-content;
 }
 
 input[type="text"].input, input[type="password"].input {
     border-radius: 5px;
-    padding: 15px;
+    padding: 13px;
     font-family: "Lato", sans-serif;
     font-weight: 500;
     outline: none;
@@ -71,14 +51,18 @@ input[type="text"].input, input[type="password"].input {
   
 input[type="date"].input {
     border-radius: 5px;
-    padding: 15px;
+    padding: 13px;
     font-family: "Lato", sans-serif;
     font-weight: 500;
     outline: none;
     transition: all 0.3s ease;
-    border: none;
-    background-color: var(--beige);
     color: var(--brown);
+    background-color: transparent;
+    border: 1px solid rgb(195, 195, 195);
+}
+
+input[type="date"].input:hover {
+    border: 1px solid var(--brown);
 }
   
 input[type="file"].input {
@@ -91,19 +75,37 @@ input[type="file"].input {
 }
   
 input[type="file"].input + label {
-    font-weight: 700;
-    color: var(--brown);
-    background-color: var(--beige);
-    display: inline-block;
+    position: relative;
+    height: 3rem;
+    color: var(--beige);
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.094em;
+    border: none;
+    padding: 0 2rem;
+    border-radius: 500px;
+    margin: 0.25rem;
+    box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.15);
     cursor: pointer;
-    padding: .8em;
-    border-radius: 5px;
-    font-weight: normal;
+    transition: transform 450ms var(--nimiq-ease),
+        box-shadow 450ms var(--nimiq-ease);
+    will-change: box-shadow;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+    font-family: "Montserrat-SemiBold", sans-serif;
+    background-color: var(--green);
+    line-height: 47px;
+    width: fit-content;
+    display: block;
+    margin: 0 auto;
 }
 
-input[type="file"].input:focus + label {
-    background-color: var(--soft-brown);
-    color: white;
+input[type="file"].input:focus + label,
+input[type="file"].input + label:hover {
+  box-shadow: 0 1rem 2.5rem rgba(0, 0, 0, 0.2);
+  transform: translate3D(0, -2px, 0);
 }
 
 .loadingContainer {
@@ -117,4 +119,5 @@ input[type="file"].input:focus + label {
     align-items: center;
     border-radius: .7em;
     backdrop-filter: blur(5px);
+    z-index: 100;
 }
