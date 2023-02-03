@@ -30,7 +30,7 @@ export default function Deploy({ tokenURI, setMenu }: DeployProps) {
         setLoadingMessage(status)
         if (status === 'ACCEPTED_ON_L2' || status === 'ACCEPTED_ON_L1') {
             setLoadingMessage('')
-            setMenu(<SuccessNotification setMenu={setMenu} message={'Poap contract deployed successfully'} />)
+            setElement(<SuccessNotification setMenu={setMenu} message={'Poap contract deployed successfully'} />)
         }
     }, [data, loading, error])
 
