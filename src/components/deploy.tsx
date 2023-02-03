@@ -1,5 +1,8 @@
 import styles from '@/styles/components/Steps.module.css'
 import { useAccount, useStarknetExecute } from '@starknet-react/core'
+import BN from 'bn.js'
+import { useEffect, useState } from 'react'
+import { ec } from 'starknet'
 import { stringToFelt } from '../../utils/felt'
 
 interface DeployProps {
@@ -7,8 +10,25 @@ interface DeployProps {
 }
 
 export default function Deploy({ tokenURI }: DeployProps) {
-    const publicKey = '0x7a8'
+    const [publicKey, setPublicKey] = useState<string>('')
+    const [password, setPassword] = useState<string>('')
     const { address } = useAccount()
+
+    useEffect(() => {
+        const textAsBuffer = new TextEncoder().encode(password.toLowerCase());
+        window.crypto.subtle.digest(
+            "SHA-256",
+            textAsBuffer
+        ).then(hashBuffer => {
+            const privateKey = new BN(new Uint8Array(hashBuffer)).mod(
+                new BN(
+                "3618502788666131213697322783095070105526743751716087489154079457884512865583"
+                )
+            );
+            const keypair = ec.getKeyPair(privateKey as BN);
+            setPublicKey(ec.getStarkKey(keypair))
+        })
+    }, [password])
 
     const deployerCallData = Object.values({
         classHash: '0x00eafb0413e759430def79539db681f8a4eb98cf4196fe457077d694c6aeeb82',
@@ -27,7 +47,7 @@ export default function Deploy({ tokenURI }: DeployProps) {
         admin: address || 0,
         starknetIdContact: '0x783a9097b26eae0586373b2ce0ed3529ddc44069d1e0fbc4f66d42b69d6850d',
         whitelistingKey: publicKey,
-        maxTimestamp: new Date((document.getElementById('date') as HTMLInputElement)?.value || 0).getTime(),
+        maxTimestamp: typeof window !== 'undefined' ? new Date((document.getElementById('date') as HTMLInputElement)?.value || 0).getTime() : 0,
         uriBaseLen: tokenURI.length,
         
     }).concat(tokenURI.split('').map((char) => stringToFelt(char).toString()))
@@ -58,7 +78,7 @@ export default function Deploy({ tokenURI }: DeployProps) {
             <div className={styles.line}>
                 <p>Poap password</p>
                 <div className={styles.inputContainer}>
-                    <input className={styles.input} type="password" />
+                    <input onChange={(e) => setPassword(e.target.value)} className={styles.input} type="password" />
                 </div>
             </div>
             <div className={styles.line}>
