@@ -15,6 +15,22 @@
     align-items     : center;
 }
 
+.close {
+    position        : absolute;
+    top             : 18px;
+    right           : 18px;
+    width           : 22px;
+    stroke          : black;
+    cursor          : pointer;
+    transition      : 0.3s;
+    background-color: transparent;
+    border          : none;
+}
+
+.close:hover {
+    stroke: rgb(124, 124, 124);
+}
+
 .overlay {
     position                   : fixed;
     display                    : flex;
@@ -42,9 +58,9 @@
     align-items     : baseline;
     justify-content : space-between;
     align-items     : center;
-    margin          : 6px 4px;
-    padding         : 6px;
-    border-radius   : 12px;
+    margin          : 8px 14px;
+    padding         : 8px;
+    border-radius   : 16px;
     border          : none;
     background-color: var(--green);
     color           : white;
