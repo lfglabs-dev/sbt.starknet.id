@@ -12,6 +12,16 @@ export default function WalletSelector({ closeWalletSelector }: { closeWalletSel
   }
 
   return <div className={styles.box}>
+    <div onClick={closeWalletSelector}>
+      <svg className={styles.close} viewBox="0 0 24 24">
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+          d="M6 18L18 6M6 6l12 12"
+        ></path>
+      </svg>
+    </div>
     <div className={styles.title}>You need a Starknet wallet</div>
     {connectors.map((connector) => {
       if (connector.available()) {
