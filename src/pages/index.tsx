@@ -1,12 +1,14 @@
 import styles from '@/styles/Home.module.css'
-import React, { useState } from "react";
+import React, { ReactElement, useState } from "react";
 import LookAndFeel from '@/components/lookAndFeel';
 import { useAccount } from '@starknet-react/core';
 import Deploy from '@/components/deploy';
 import Connect from '@/components/connection/connect';
+import ErrorNotification from '@/components/notifications/errorNotification';
 
 export default function Home() {
   const [tokenURI, setTokenURI] = useState<string>('');
+  const [menu, setMenu] = useState<ReactElement | null>(null);
   const { address } = useAccount();
 
   return <main className={styles.page}>
@@ -17,7 +19,7 @@ export default function Home() {
       <h1 className={styles.title}>sbtmaker</h1>
       <form onSubmit={(e) => e.preventDefault()} className={styles.form}>
         {
-          !tokenURI ? <LookAndFeel setTokenURI={setTokenURI} className={!address ? styles.blur : ''} />
+          !tokenURI ? <LookAndFeel setMenu={setMenu} setTokenURI={setTokenURI} className={!address ? styles.blur : ''} />
           : <Deploy tokenURI={tokenURI} />
         }
         { !address ? <Connect /> : null }
@@ -25,5 +27,6 @@ export default function Home() {
     </section>
     <img className={styles.leaf1} src="/leaves/leaf_3.png" />
     <img className={styles.leaf2} src="/leaves/leaf_2.png" />
+    {menu}
   </main>
 }

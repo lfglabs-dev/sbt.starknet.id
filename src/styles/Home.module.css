@@ -22,6 +22,9 @@
   margin: 0;
   font-size: 4em;
   text-align: center;
+  font-family: "Montserrat-ExtraBold";
+  color: var(--green);
+  text-shadow: 4px 4px var(--soft-brown);
 }
 
 .homeButton {

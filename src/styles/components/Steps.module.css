@@ -45,3 +45,47 @@
     cursor: pointer;
     color: var(--beige);
 }
+
+input[type="text"].input, input[type="password"].input {
+    border-radius: 5px;
+    padding: 15px;
+    font-family: "Lato", sans-serif;
+    font-weight: 500;
+    outline: none;
+    transition: all 0.3s ease;
+    border: none;
+    background-color: var(--beige);
+    color: var(--brown);
+  }
+  
+  input[type="date"].input {
+    border-radius: 5px;
+    padding: 15px;
+    font-family: "Lato", sans-serif;
+    font-weight: 500;
+    outline: none;
+    transition: all 0.3s ease;
+    border: none;
+    background-color: var(--beige);
+    color: var(--brown);
+  }
+  
+  input[type="file"].input {
+    width: 0.1px;
+      height: 0.1px;
+      opacity: 0;
+      overflow: hidden;
+      position: absolute;
+      z-index: -1;
+  }
+  
+  input[type="file"].input + label {
+    font-weight: 700;
+    color: var(--brown);
+    background-color: var(--beige);
+    display: inline-block;
+    cursor: pointer;
+    padding: .8em;
+    border-radius: 5px;
+    font-weight: normal;
+  }

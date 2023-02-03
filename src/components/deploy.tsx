@@ -52,19 +52,19 @@ export default function Deploy({ tokenURI }: DeployProps) {
             <div className={styles.line}>
                 <p>Admin</p>
                 <div className={styles.inputContainer}>
-                    <input type="text" defaultValue={address} />
+                    <input className={styles.input} type="text" defaultValue={address} />
                 </div>
             </div>
             <div className={styles.line}>
                 <p>Poap password</p>
                 <div className={styles.inputContainer}>
-                    <input type="password" />
+                    <input className={styles.input} type="password" />
                 </div>
             </div>
             <div className={styles.line}>
                 <p>Max mint date</p>
                 <div className={styles.inputContainer}>
-                    <input id="date" type="date" defaultValue={new Date(Date.now() + 1000 * 3600 * 24 * 30 * 6).toISOString().split('T')[0]} />
+                    <input className={styles.input} id="date" type="date" defaultValue={new Date(Date.now() + 1000 * 3600 * 24 * 30 * 6).toISOString().split('T')[0]} />
                 </div>
             </div>
         </div>
