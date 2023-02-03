@@ -1,0 +1,14 @@
+.button {
+    font-family     : "Montserrat-SemiBold";
+    font-size       : 20px;
+    padding         : 10px;
+    border-radius   : 12px;
+    border          : none;
+    color           : white;
+    background-color: var(--green);
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: var(--lightgreen);
+}
