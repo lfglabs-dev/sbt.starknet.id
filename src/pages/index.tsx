@@ -4,7 +4,6 @@ import LookAndFeel from '@/components/lookAndFeel';
 import { useAccount } from '@starknet-react/core';
 import Deploy from '@/components/deploy';
 import Connect from '@/components/connection/connect';
-import ErrorNotification from '@/components/notifications/errorNotification';
 
 export default function Home() {
   const [tokenURI, setTokenURI] = useState<string>('');
