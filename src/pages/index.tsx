@@ -4,6 +4,7 @@ import LookAndFeel from '@/components/lookAndFeel';
 import { useAccount } from '@starknet-react/core';
 import Deploy from '@/components/deploy';
 import Connect from '@/components/connection/connect';
+import Loading from '@/components/UI/loading';
 
 export default function Home() {
   const [tokenURI, setTokenURI] = useState<string>('');
@@ -17,10 +18,15 @@ export default function Home() {
     <section className={styles.formContainer}>
       <h1 className={styles.title}>sbtmaker</h1>
       <form onSubmit={(e) => e.preventDefault()} className={styles.form}>
-        {
-          !tokenURI ? <LookAndFeel setMenu={setMenu} setTokenURI={setTokenURI} className={!address ? styles.blur : ''} />
-          : <Deploy tokenURI={tokenURI} />
-        }
+        <div className={[styles.sidesContainer, !address ? styles.blur : ''].join(' ')}>
+          <img className={styles.formSideImage} />
+          <div className={styles.formFields}>
+          {
+            !tokenURI ? <LookAndFeel setMenu={setMenu} setTokenURI={setTokenURI} />
+            : <Deploy tokenURI={tokenURI} />
+          }
+          </div>
+        </div>
         { !address ? <Connect /> : null }
       </form>
     </section>

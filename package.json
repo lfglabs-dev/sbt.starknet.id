@@ -9,6 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.0",
+    "@emotion/styled": "^11.10.0",
+    "@mui/icons-material": "^5.8.4",
+    "@mui/material": "^5.10.1",
     "@next/font": "13.1.6",
     "@starknet-react/core": "^0.14.8",
     "@types/node": "18.11.18",
@@ -23,12 +27,9 @@
     "nft.storage": "^7.0.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-loader-spinner": "^5.3.4",
     "starknet": "^4.17.1",
-    "typescript": "4.9.5",
-    "@emotion/react": "^11.10.0",
-    "@emotion/styled": "^11.10.0",
-    "@mui/icons-material": "^5.8.4",
-    "@mui/material": "^5.10.1"
+    "typescript": "4.9.5"
   },
   "devDependencies": {
     "@types/bn.js": "^5.1.1",

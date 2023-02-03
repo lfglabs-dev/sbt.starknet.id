@@ -1,5 +1,6 @@
 .title {
     text-align: center;
+    margin: 10px 0;
 }
 
 .list {
@@ -34,6 +35,16 @@
     width: 200px;
 }
 
+@media screen and (max-width: 620px) {
+    .line p {
+        width: 100%;
+        text-align: center;
+    }
+    .line input, .line label {
+        width: calc(100% - 15px);
+    }
+}
+
 .nextButton {
     background-color: var(--green);
     border: none;
@@ -56,9 +67,9 @@ input[type="text"].input, input[type="password"].input {
     border: none;
     background-color: var(--beige);
     color: var(--brown);
-  }
+}
   
-  input[type="date"].input {
+input[type="date"].input {
     border-radius: 5px;
     padding: 15px;
     font-family: "Lato", sans-serif;
@@ -68,18 +79,18 @@ input[type="text"].input, input[type="password"].input {
     border: none;
     background-color: var(--beige);
     color: var(--brown);
-  }
+}
   
-  input[type="file"].input {
+input[type="file"].input {
     width: 0.1px;
-      height: 0.1px;
-      opacity: 0;
-      overflow: hidden;
-      position: absolute;
-      z-index: -1;
-  }
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
   
-  input[type="file"].input + label {
+input[type="file"].input + label {
     font-weight: 700;
     color: var(--brown);
     background-color: var(--beige);
@@ -88,4 +99,22 @@ input[type="text"].input, input[type="password"].input {
     padding: .8em;
     border-radius: 5px;
     font-weight: normal;
-  }
+}
+
+input[type="file"].input:focus + label {
+    background-color: var(--soft-brown);
+    color: white;
+}
+
+.loadingContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: .7em;
+    backdrop-filter: blur(5px);
+}

@@ -18,6 +18,18 @@
   border-radius: .7em;
 }
 
+.sidesContainer {
+  display: flex;
+  height: 100%;
+}
+
+.formSideImage {
+  width: 256px;
+  height: 100%;
+  background-color: var(--brown);
+  border-radius: .7em;
+}
+
 .title {
   margin: 0;
   font-size: 4em;
@@ -51,4 +63,36 @@
   top: 0;
   transform: rotate(180deg);
   width: 250px;
+}
+
+@media screen and (max-width: 620px) {
+  .form {
+    width: 100vw;
+    height: 540px;
+    border-radius: 0;
+  }
+  .sidesContainer {
+    flex-direction: column;
+  }
+  .formSideImage {
+    width: 100vw;
+    height: 250px;
+  }
+  .formFields {
+    width: 100vw;
+    height: 300px;
+  }
+  .leaf1 {
+    width: 150px;
+  }
+  .leaf2 {
+    position: fixed;
+    right: 0;
+    top: 0;
+    transform: rotate(180deg);
+    width: 130px;
+  }
+  .homeButton {
+    display: none;
+  }
 }
