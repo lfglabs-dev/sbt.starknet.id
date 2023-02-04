@@ -17,7 +17,6 @@ const TextField: FunctionComponent<TextFieldProps> = ({
     required,
     ...props
 }) => {
-    console.log(label, defaultValue)
   return (
         <TextFieldMUI
             fullWidth

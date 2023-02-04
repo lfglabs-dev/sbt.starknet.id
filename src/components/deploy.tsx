@@ -1,20 +1,43 @@
 import styles from '@/styles/components/Steps.module.css'
 import TextField from './UI/textField'
-import { useAccount, useStarknetExecute } from '@starknet-react/core'
+import { useAccount, useStarknetExecute, useTransaction } from '@starknet-react/core'
 import BN from 'bn.js'
-import { useEffect, useState } from 'react'
+import { ReactElement, useEffect, useState } from 'react'
 import { ec } from 'starknet'
 import { stringToFelt } from '../../utils/felt'
 import Button from './UI/button'
+import LoadingScreen from './UI/screens/loadingScreen'
+import ErrorNotification from './notifications/errorNotification'
+import SuccessNotification from './notifications/successNotification copy'
 
 interface DeployProps {
     tokenURI: string
+    setMenu: (element: ReactElement | null) => void
 }
 
-export default function Deploy({ tokenURI }: DeployProps) {
+export default function Deploy({ tokenURI, setMenu }: DeployProps) {
     const [publicKey, setPublicKey] = useState<string>('')
     const [password, setPassword] = useState<string>('')
+    const [element, setElement] = useState<ReactElement | null>(null)
+    const [loadingMessage, setLoadingMessage] = useState<string>('')
+    const [transactionHash, setTransactionHash] = useState<string>('')
+    const { data, loading, error } = useTransaction({ hash: transactionHash })
     const { address } = useAccount()
+
+    useEffect(() => {
+        if (!data) return;
+        const status = (data as any).status
+        setLoadingMessage(status)
+        if (status === 'ACCEPTED_ON_L2' || status === 'ACCEPTED_ON_L1') {
+            setLoadingMessage('')
+            setElement(<SuccessNotification setMenu={setElement} message={'Poap contract deployed successfully'} />)
+        }
+    }, [data, loading, error])
+
+    useEffect(() => {
+        if (!loadingMessage) return;
+        setElement(<LoadingScreen message={loadingMessage} />)
+    }, [loadingMessage])
 
     useEffect(() => {
         const textAsBuffer = new TextEncoder().encode(password.toLowerCase());
@@ -65,7 +88,11 @@ export default function Deploy({ tokenURI }: DeployProps) {
     })
 
     const handleDeploy = () => {
-        execute()
+        if (!password) return setMenu(<ErrorNotification setMenu={setMenu} message={'Please enter a password for your poap'} />)
+        execute().then((tx) => {
+            setLoadingMessage((tx as any).code)
+            setTransactionHash(tx.transaction_hash)
+        })
     }
 
     return <>
@@ -84,5 +111,6 @@ export default function Deploy({ tokenURI }: DeployProps) {
                 deploy
             </Button>
         </div>
+        {element}
     </>
 }

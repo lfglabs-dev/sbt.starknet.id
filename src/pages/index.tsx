@@ -20,7 +20,7 @@ export default function Home() {
             <h1 className={styles.title}>sbtmaker</h1>
             {
               !tokenURI ? <LookAndFeel setMenu={setMenu} setTokenURI={setTokenURI} />
-              : <Deploy tokenURI={tokenURI} />
+              : <Deploy setMenu={setMenu} tokenURI={tokenURI} />
             }
           </div>
         </div>
