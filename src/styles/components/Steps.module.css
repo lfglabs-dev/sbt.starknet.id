@@ -5,8 +5,7 @@
     justify-content: center;
 }
 
-.textField, .line {
-    margin: 10px;
+.line {
     width: calc(100% - 20px);
 }
 

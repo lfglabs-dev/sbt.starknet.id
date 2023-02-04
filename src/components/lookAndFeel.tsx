@@ -67,6 +67,7 @@ export default function LookAndFeel({ setTokenURI, setMenu, ...props }: LookAndF
         <div {...props}>
             <div className={styles.list}>
                 <TextField error={clickedNext && !name} helperText={clickedNext && !name ? 'Please enter a name' : ''} onChange={(e) => setName(e.target.value)} className={styles.textField} label="Name" id="name" />
+                <br />
                 <TextField error={clickedNext && !desc} helperText={clickedNext && !desc ? 'Please enter a description' : ''} onChange={(e) => setDesc(e.target.value)} className={styles.textField} label="Description" id="description" />
             </div>
             <br />
