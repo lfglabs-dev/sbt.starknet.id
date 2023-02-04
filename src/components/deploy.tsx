@@ -57,21 +57,21 @@ export default function Deploy({ tokenURI, setMenu }: DeployProps) {
     }, [password])
 
     const deployerCallData = Object.values({
-        classHash: process.env.PROXY_CLASS_HASH,
+        classHash: process.env.NEXT_PUBLIC_PROXY_CLASS_HASH,
         salt: Math.round(Math.random() * 99999999),
         unique: 0,
         calldata_len: 8 + tokenURI.length,
     });
 
     const proxyCallData = Object.values({
-        implementationHash: process.env.IMPLEMENTATION_CLASS_HASH,
+        implementationHash: process.env.NEXT_PUBLIC_IMPLEMENTATION_CLASS_HASH,
         selector: "1295919550572838631247819983596733806859788957403169325509326258146877103642",
         callDataLen: 5 + tokenURI.length,
     })
 
     const initializerCallData = Object.values({
         admin: address || 0,
-        starknetIdContact: process.env.STARKNET_ID_CONTRACT,
+        starknetIdContact: process.env.NEXT_PUBLIC_STARKNET_ID_CONTRACT,
         whitelistingKey: publicKey,
         maxTimestamp: typeof window !== "undefined" ? new Date((document.getElementById("date") as HTMLInputElement)?.value || 0).getTime() : 0,
         uriBaseLen: tokenURI.length,
@@ -81,7 +81,7 @@ export default function Deploy({ tokenURI, setMenu }: DeployProps) {
     const { execute } = useStarknetExecute({
         calls: [
             {
-                contractAddress: process.env.DEPLOYER_CONTRACT as string,
+                contractAddress: process.env.NEXT_PUBLIC_DEPLOYER_CONTRACT as string,
                 entrypoint: "deployContract",
                 calldata: deployerCallData.concat(proxyCallData).concat(initializerCallData)
             }
