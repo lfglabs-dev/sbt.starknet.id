@@ -101,7 +101,9 @@ export default function Deploy({ tokenURI, setMenu }: DeployProps) {
         <>
             <div className={styles.list}>
                 <TextField className={styles.textField} label="Admin" defaultValue={address} />
+                <br />
                 <TextField error={clickedDeploy && !password} helperText={clickedDeploy && !password ? 'Please enter a password' : ''} type="password" className={styles.textField} label="Poap password" onChange={(e) => setPassword(e.target.value)} />
+                <br />
                 <div className={styles.line}>
                     <p>Max mint date</p>
                     <div className={styles.inputContainer}>
