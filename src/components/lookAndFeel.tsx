@@ -3,10 +3,9 @@ import { useAccount } from "@starknet-react/core"
 import { ReactElement, useState } from "react"
 import ErrorNotification from "./notifications/errorNotification"
 import SuccessNotification from "./notifications/successNotification copy"
-import Button from "./UI/button"
+import WarningNotification from "./notifications/warningNotification"
 import Loading from "./UI/loading"
 import TextField from "./UI/textField"
-import buttonStyles from "@/styles/components/button.module.css"
 
 interface LookAndFeelProps {
     [key: string]: any,
@@ -42,7 +41,18 @@ export default function LookAndFeel({ setTokenURI, setMenu, ...props }: LookAndF
         // Check that the file is an image
         const file = fileInput.files[0];
         if (!file.type.startsWith("image/")) return error("The selected file is not an image")
-
+        const img = new Image();
+        const _URL = window.URL || window.webkitURL;
+        var objectUrl = _URL.createObjectURL(file);
+        img.onload = () => {
+            const width = img.width;
+            const height = img.height;
+            // Check that the image is 2:3
+            console.log(width, height, width * 1.5)
+            if (height !== width * 1.5) setMenu(<WarningNotification setMenu={setMenu} message="It is recommended to have a 2:3 image" />)
+            _URL.revokeObjectURL(objectUrl);
+        };
+        img.src = objectUrl;
         const formData = new FormData();
         formData.append("file", file);
         formData.append("name", name);
