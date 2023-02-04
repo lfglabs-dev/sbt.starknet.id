@@ -1,12 +1,12 @@
-import styles from '@/styles/components/Steps.module.css'
-import { useAccount } from '@starknet-react/core'
-import { ReactElement, useState } from 'react'
-import ErrorNotification from './notifications/errorNotification'
-import SuccessNotification from './notifications/successNotification copy'
-import Button from './UI/button'
-import Loading from './UI/loading'
-import TextField from './UI/textField'
-import buttonStyles from '@/styles/components/button.module.css'
+import styles from "@/styles/components/Steps.module.css"
+import { useAccount } from "@starknet-react/core"
+import { ReactElement, useState } from "react"
+import ErrorNotification from "./notifications/errorNotification"
+import SuccessNotification from "./notifications/successNotification copy"
+import Button from "./UI/button"
+import Loading from "./UI/loading"
+import TextField from "./UI/textField"
+import buttonStyles from "@/styles/components/button.module.css"
 
 interface LookAndFeelProps {
     [key: string]: any,
@@ -15,8 +15,8 @@ interface LookAndFeelProps {
 }
 
 export default function LookAndFeel({ setTokenURI, setMenu, ...props }: LookAndFeelProps) {
-    const [name, setName] = useState<string>('')
-    const [desc, setDesc] = useState<string>('')
+    const [name, setName] = useState<string>("")
+    const [desc, setDesc] = useState<string>("")
     const [element, setElement] = useState<ReactElement | null>(null)
     const { address } = useAccount()
     
@@ -27,30 +27,30 @@ export default function LookAndFeel({ setTokenURI, setMenu, ...props }: LookAndF
                 <Loading />
             </div>
         )
-        const nameInput = document.getElementById('name') as HTMLInputElement;
+        const nameInput = document.getElementById("name") as HTMLInputElement;
         const name = nameInput.value;
-        if (!name) return error('Please enter a name for your poap')
+        if (!name) return error("Please enter a name for your poap")
 
-        const descInput = document.getElementById('description') as HTMLInputElement;
+        const descInput = document.getElementById("description") as HTMLInputElement;
         const desc = descInput.value;
-        if (!desc) return error('Please enter a description for your poap')
+        if (!desc) return error("Please enter a description for your poap")
 
-        const fileInput = document.getElementById('image') as HTMLInputElement;
-        if (fileInput.files?.length !== 1) return error('Please select an image')
+        const fileInput = document.getElementById("image") as HTMLInputElement;
+        if (fileInput.files?.length !== 1) return error("Please select an image")
         // Check that the file is an image
         const file = fileInput.files[0];
-        if (!file.type.startsWith('image/')) return error('The selected file is not an image')
+        if (!file.type.startsWith("image/")) return error("The selected file is not an image")
 
         const formData = new FormData();
         formData.append("file", file);
         formData.append("name", name);
         formData.append("desc", desc);
-        const res = await fetch('/api/nft_storage', {
-          method: 'post',
+        const res = await fetch("/api/nft_storage", {
+          method: "post",
           body: formData
         })
         const json = await res.json()
-        if (!json.url) return error('Something went wrong');
+        if (!json.url) return error("Something went wrong");
         setTokenURI(json.url)
         setMenu(<SuccessNotification setMenu={setMenu} message="Image successfully uploaded" />)
         setElement(null)
@@ -61,14 +61,16 @@ export default function LookAndFeel({ setTokenURI, setMenu, ...props }: LookAndF
         setMenu(<ErrorNotification setMenu={setMenu} message={message} />)
     }
 
-    return <div {...props}>
-        <div className={styles.list}>
-            <TextField onChange={(e) => setName(e.target.value)} className={styles.textField} label='Name' id="name" />
-            <TextField onChange={(e) => setDesc(e.target.value)} className={styles.textField} label='Description' id="description" />
+    return (
+        <div {...props}>
+            <div className={styles.list}>
+                <TextField onChange={(e) => setName(e.target.value)} className={styles.textField} label="Name" id="name" />
+                <TextField onChange={(e) => setDesc(e.target.value)} className={styles.textField} label="Description" id="description" />
+            </div>
+            <br />
+            <input onChange={handleNext} className={styles.input} name="image" id="image" type="file" />
+            <label htmlFor="image">Choose an image</label>
+            {element}
         </div>
-        <br />
-        <input onChange={handleNext} className={styles.input} name='image' id="image" type="file" />
-        <label htmlFor="image">Choose an image</label>
-        {element}
-    </div>
+    )
 }
