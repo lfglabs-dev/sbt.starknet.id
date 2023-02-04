@@ -25,16 +25,19 @@
     width: 100%;
 }
 
-@media screen and (max-width: 620px) {
+.nextButton {
+    display: block;
+    width: fit-content;
+    margin: 30px auto;
+}
+
+@media screen and (max-width: 800px) {
     .line input, .line label {
         width: calc(100% - 15px);
     }
-}
-
-.nextButton {
-    display: block;
-    margin: 0 auto;
-    width: fit-content;
+    .nextButton {
+        margin: 30px auto 0 auto;
+    }
 }
 
 input[type="text"].input, input[type="password"].input {
@@ -102,6 +105,13 @@ input[type="file"].input + label {
     margin: 0 auto;
 }
 
+@media screen and (max-width: 420px) {
+    input[type="file"].input + label {
+        font-size: .75rem;
+        width: 100%;
+    }
+}
+
 input[type="file"].input:focus + label,
 input[type="file"].input + label:hover {
   box-shadow: 0 1rem 2.5rem rgba(0, 0, 0, 0.2);
@@ -117,7 +127,7 @@ input[type="file"].input + label:hover {
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: .7em;
+    border-radius: 20px;
     backdrop-filter: blur(5px);
     z-index: 100;
 }

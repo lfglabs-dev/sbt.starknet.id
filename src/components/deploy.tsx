@@ -21,6 +21,7 @@ export default function Deploy({ tokenURI, setMenu }: DeployProps) {
     const [element, setElement] = useState<ReactElement | null>(null)
     const [loadingMessage, setLoadingMessage] = useState<string>("")
     const [transactionHash, setTransactionHash] = useState<string>("")
+    const [clickedDeploy, setClickedDeploy] = useState<boolean>(false)
     const { data, loading, error } = useTransaction({ hash: transactionHash })
     const { address } = useAccount()
 
@@ -88,6 +89,7 @@ export default function Deploy({ tokenURI, setMenu }: DeployProps) {
     })
 
     const handleDeploy = () => {
+        setClickedDeploy(true)
         if (!password) return setMenu(<ErrorNotification setMenu={setMenu} message={"Please enter a password for your poap"} />)
         execute().then((tx) => {
             setLoadingMessage((tx as any).code)
@@ -99,7 +101,7 @@ export default function Deploy({ tokenURI, setMenu }: DeployProps) {
         <>
             <div className={styles.list}>
                 <TextField className={styles.textField} label="Admin" defaultValue={address} />
-                <TextField type="password" className={styles.textField} label="Poap password" onChange={(e) => setPassword(e.target.value)} />
+                <TextField error={clickedDeploy && !password} helperText={clickedDeploy && !password ? 'Please enter a password' : ''} type="password" className={styles.textField} label="Poap password" onChange={(e) => setPassword(e.target.value)} />
                 <div className={styles.line}>
                     <p>Max mint date</p>
                     <div className={styles.inputContainer}>
