@@ -15,7 +15,7 @@ export default function Home() {
       <section className={styles.formContainer}>
         <form onSubmit={(e) => e.preventDefault()} className={styles.form}>
           <div className={[styles.sidesContainer, !address ? styles.blur : ""].join(" ")}>
-            <img className={styles.formSideImage} />
+            <div className={styles.formSideImage} />
             <div className={styles.formFields}>
               <h1 className={styles.title}>sbtmaker</h1>
               {

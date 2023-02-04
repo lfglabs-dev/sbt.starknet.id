@@ -18,9 +18,11 @@ export default function LookAndFeel({ setTokenURI, setMenu, ...props }: LookAndF
     const [name, setName] = useState<string>("")
     const [desc, setDesc] = useState<string>("")
     const [element, setElement] = useState<ReactElement | null>(null)
+    const [clickedNext, setClickedNext] = useState<boolean>(false)
     const { address } = useAccount()
     
     const handleNext = async () => {
+        setClickedNext(true)
         if (!address) return;
         setElement(
             <div className={styles.loadingContainer}>
@@ -61,11 +63,13 @@ export default function LookAndFeel({ setTokenURI, setMenu, ...props }: LookAndF
         setMenu(<ErrorNotification setMenu={setMenu} message={message} />)
     }
 
+    console.log(name, clickedNext)
+
     return (
         <div {...props}>
             <div className={styles.list}>
-                <TextField onChange={(e) => setName(e.target.value)} className={styles.textField} label="Name" id="name" />
-                <TextField onChange={(e) => setDesc(e.target.value)} className={styles.textField} label="Description" id="description" />
+                <TextField error={clickedNext && !name} helperText={clickedNext && !name ? 'Please enter a name' : ''} onChange={(e) => setName(e.target.value)} className={styles.textField} label="Name" id="name" />
+                <TextField error={clickedNext && !desc} helperText={clickedNext && !desc ? 'Please enter a description' : ''} onChange={(e) => setDesc(e.target.value)} className={styles.textField} label="Description" id="description" />
             </div>
             <br />
             <input onChange={handleNext} className={styles.input} name="image" id="image" type="file" />
