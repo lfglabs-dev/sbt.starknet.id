@@ -11,6 +11,7 @@
   --soft-brown: #bf9e7b;
   --light-soft-brown: #F2DDBD;
   --beige     : #fff9f0;
+  --nimiq-ease: cubic-bezier(0.25, 0, 0, 1);
 }
 
 @layer base {
@@ -37,4 +38,8 @@
 
 html, body, h2, p, label {
   font-family: "Montserrat", sans-serif;
+}
+
+html, body {
+  background-color: var(--light-soft-brown);
 }
