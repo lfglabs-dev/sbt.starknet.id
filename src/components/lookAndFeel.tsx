@@ -53,7 +53,7 @@ export default function LookAndFeel({ setTokenURI, setMenu, ...props }: LookAndF
         })
         const json = await res.json()
         if (!json.url) return error("Something went wrong");
-        setTokenURI(json.url)
+        setTokenURI(json.url + '?tokenId=')
         setMenu(<SuccessNotification setMenu={setMenu} message="Image successfully uploaded" />)
         setElement(null)
     }
@@ -62,7 +62,7 @@ export default function LookAndFeel({ setTokenURI, setMenu, ...props }: LookAndF
         setElement(null)
         setMenu(<ErrorNotification setMenu={setMenu} message={message} />)
     }
-    
+
     return (
         <div {...props}>
             <div className={styles.list}>
