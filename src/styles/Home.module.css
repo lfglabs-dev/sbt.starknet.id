@@ -33,8 +33,11 @@
 .formSideImage {
   width: 300px;
   height: 100%;
-  background-color: var(--brown);
   border-radius: 20px;
+  background-color: var(--brown);
+  background-image: url("/visuals/sbtIllustration.webp");
+  background-size: cover;
+  background-position: center;
 }
 
 .title {
