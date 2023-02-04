@@ -45,6 +45,7 @@
 
 .blur {
   filter: blur(5px);
+  pointer-events: none;
 }
 
 @media screen and (max-width: 620px) {
