@@ -62,9 +62,7 @@ export default function LookAndFeel({ setTokenURI, setMenu, ...props }: LookAndF
         setElement(null)
         setMenu(<ErrorNotification setMenu={setMenu} message={message} />)
     }
-
-    console.log(name, clickedNext)
-
+    
     return (
         <div {...props}>
             <div className={styles.list}>
