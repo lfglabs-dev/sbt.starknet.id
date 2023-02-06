@@ -4,6 +4,7 @@ import LookAndFeel from "@/components/lookAndFeel";
 import { useAccount } from "@starknet-react/core";
 import Deploy from "@/components/deploy";
 import Connect from "@/components/connection/connect";
+import NetworkSelector from "@/components/connection/networkSelector";
 
 export default function Home() {
   const [tokenURI, setTokenURI] = useState<string>("");
@@ -24,7 +25,7 @@ export default function Home() {
               }
             </div>
           </div>
-          { !address ? <Connect /> : null }
+          { !address ? <Connect /> : <NetworkSelector /> }
         </form>
       </section>
       {menu}
