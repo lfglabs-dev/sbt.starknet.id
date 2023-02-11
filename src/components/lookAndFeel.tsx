@@ -7,17 +7,13 @@ import WarningNotification from "./notifications/warningNotification";
 import Loading from "./UI/loading";
 import TextField from "./UI/textField";
 
-interface LookAndFeelProps {
+type LookAndFeelProps = {
   [key: string]: any;
   setTokenURI: (tokenURI: string) => void;
   setMenu: (menu: ReactElement | null) => void;
-}
+};
 
-export default function LookAndFeel({
-  setTokenURI,
-  setMenu,
-  ...props
-}: LookAndFeelProps) {
+const LookAndFeel = ({ setTokenURI, setMenu, ...props }: LookAndFeelProps) => {
   const [name, setName] = useState<string>("");
   const [desc, setDesc] = useState<string>("");
   const [element, setElement] = useState<ReactElement | null>(null);
@@ -124,4 +120,6 @@ export default function LookAndFeel({
       {element}
     </div>
   );
-}
+};
+
+export default LookAndFeel;

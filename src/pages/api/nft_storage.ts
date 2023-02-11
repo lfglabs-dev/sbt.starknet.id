@@ -81,12 +81,10 @@ export default async function uploadToIpfs(
       fields.name as string,
       fields.desc as string
     );
-    res
-      .status(200)
-      .send({
-        message: "Success",
-        ipnft: result.ipnft,
-        url: `https://ipfs.io/ipfs/${result.ipnft}/metadata.json`,
-      });
+    res.status(200).send({
+      message: "Success",
+      ipnft: result.ipnft,
+      url: `https://ipfs.io/ipfs/${result.ipnft}/metadata.json`,
+    });
   });
 }

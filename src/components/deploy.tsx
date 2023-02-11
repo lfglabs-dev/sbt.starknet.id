@@ -6,7 +6,7 @@ import {
   useTransaction,
 } from "@starknet-react/core";
 import BN from "bn.js";
-import { ReactElement, useEffect, useState } from "react";
+import { ReactElement, useEffect, useState, FunctionComponent } from "react";
 import { ec } from "starknet";
 import { stringToFelt } from "../../utils/felt";
 import Button from "./UI/button";
@@ -14,22 +14,21 @@ import LoadingScreen from "./UI/screens/loadingScreen";
 import ErrorNotification from "./notifications/errorNotification";
 import SuccessNotification from "./notifications/successNotification copy";
 
-interface DeployProps {
+type DeployProps = {
   tokenURI: string;
   setMenu: (element: ReactElement | null) => void;
   setTransactionHash: (transactionHash: string) => void;
   transactionHash: string;
   setFinalStep: (finalStep: boolean) => void;
-}
+};
 
-export default function Deploy({
+const Deploy: FunctionComponent<DeployProps> = ({
   tokenURI,
   setMenu,
   setTransactionHash,
   transactionHash,
   setFinalStep,
-  ...props
-}: DeployProps) {
+}) => {
   const [publicKey, setPublicKey] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [element, setElement] = useState<ReactElement | null>(null);
@@ -168,4 +167,6 @@ export default function Deploy({
       {element}
     </>
   );
-}
+};
+
+export default Deploy;
