@@ -124,6 +124,22 @@ input[type="file"].input + label:hover {
     justify-content: center;
     align-items: center;
     border-radius: 20px;
+    -webkit-backdrop-filter: blur(5px);
     backdrop-filter: blur(5px);
     z-index: 100;
+}
+
+.subtitle {
+    text-align: center;
+    color: var(--brown);
+    font-weight: 400;
+}
+
+.viewTX {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0 0 0;
+    color: var(--green);
+    letter-spacing: 2px;
+    font-weight: bolder;
 }

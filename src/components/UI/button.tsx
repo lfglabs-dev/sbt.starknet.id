@@ -2,7 +2,7 @@ import React, { FunctionComponent, ReactNode } from "react";
 import styles from "@/styles/components/button.module.css";
 
 type ButtonProps = {
-  onClick: () => void;
+  onClick?: () => void;
   children: string | ReactNode;
   disabled?: boolean;
 };
@@ -15,7 +15,7 @@ const Button: FunctionComponent<ButtonProps> = ({
   return (
     <button
       disabled={disabled}
-      onClick={onClick}
+      onClick={onClick || (() => {})}
       className={styles["nq-button"]}
     >
       {children}

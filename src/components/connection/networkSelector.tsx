@@ -4,10 +4,12 @@ import Button from "../UI/button";
 import ModalMessage from "../UI/modalMessage";
 import styles from '@/styles/components/connection/networkSelector.module.css'
 
-export default function NetworkSelector() {
-    // connection
-    const [isWrongNetwork, setIsWrongNetwork] = useState(false);
+interface NetworkSelectorProps {
+    isWrongNetwork: boolean;
+    setIsWrongNetwork: (isWrongNetwork: boolean) => void;
+}
 
+export default function NetworkSelector({ isWrongNetwork, setIsWrongNetwork} : NetworkSelectorProps) {
     // starknet-react
     const { address } = useAccount();
     const { disconnect } = useConnectors();
