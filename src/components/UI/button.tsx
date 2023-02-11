@@ -15,7 +15,7 @@ const Button: FunctionComponent<ButtonProps> = ({
   return (
     <button
       disabled={disabled}
-      onClick={onClick || (() => {})}
+      onClick={onClick}
       className={styles["nq-button"]}
     >
       {children}

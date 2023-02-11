@@ -1,18 +1,18 @@
 .menu {
-    position: absolute;
-    background-color: var(--beige);
-    align-self: center;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    border-radius: 20px;
-    padding: 45px;
-    max-width: 500px;
-    display: flex;
-    flex-direction: column;
-    z-index: 1000;
-  }
-  
+  position: absolute;
+  background-color: var(--beige);
+  align-self: center;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 20px;
+  padding: 45px;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+}
+
 .blackFilter {
   width: 100%;
   height: 100%;
@@ -56,7 +56,7 @@
     margin: -7px -2px 2px;
   }
 }
-  
+
 .buttonContainer {
   margin-top: 1.25rem;
   display: flex;

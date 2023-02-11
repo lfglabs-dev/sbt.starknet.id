@@ -6,19 +6,14 @@ type LoadingScreenProps = {
   message: string;
 };
 
-const LoadingScreen: FunctionComponent<LoadingScreenProps> = ({
-  message
-}) => {
+const LoadingScreen: FunctionComponent<LoadingScreenProps> = ({ message }) => {
   return (
     <div className={styles.container}>
       <div className={styles.content}>
-          <h2 className={styles.message}>  
-              {message}
-          </h2>
-          <Loading />
-        </div>
+        <h2 className={styles.message}>{message}</h2>
+        <Loading />
+      </div>
     </div>
-            
   );
 };
 
