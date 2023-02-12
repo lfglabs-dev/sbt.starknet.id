@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, FunctionComponent } from "react";
 import { useConnectors, useAccount, useStarknet } from "@starknet-react/core";
 import Button from "../UI/button";
 import ModalMessage from "../UI/modalMessage";
@@ -9,10 +9,10 @@ type NetworkSelectorProps = {
   setIsWrongNetwork: (isWrongNetwork: boolean) => void;
 };
 
-const NetworkSelector = ({
+const NetworkSelector: FunctionComponent<NetworkSelectorProps> = ({
   isWrongNetwork,
   setIsWrongNetwork,
-}: NetworkSelectorProps) => {
+}) => {
   // starknet-react
   const { address } = useAccount();
   const { disconnect } = useConnectors();

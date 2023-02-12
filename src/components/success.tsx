@@ -1,11 +1,14 @@
-import Button from "./UI/button";
 import styles from "@/styles/components/Steps.module.css";
+import { FunctionComponent } from "react";
 
-type LookAndFeelProps = {
+type SuccessProps = {
   transactionHash: string;
 };
 
-const LookAndFeel = ({ transactionHash, ...props }: LookAndFeelProps) => {
+const LookAndFeel: FunctionComponent<SuccessProps> = ({
+  transactionHash,
+  ...props
+}) => {
   return (
     <div {...props}>
       <h2 className={styles.subtitle}>

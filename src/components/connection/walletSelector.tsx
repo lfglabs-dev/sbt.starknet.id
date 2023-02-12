@@ -1,13 +1,15 @@
-import React from "react";
+import React, { FunctionComponent } from "react";
 import { Connector, useConnectors } from "@starknet-react/core";
 import WalletIcons from "./walletIcons";
 import styles from "@/styles/components/connection/WalletSelector.module.css";
 
-export default function WalletSelector({
-  closeWalletSelector,
-}: {
+type WalletSelectorProps = {
   closeWalletSelector: () => void;
-}) {
+};
+
+const WalletSelector: FunctionComponent<WalletSelectorProps> = ({
+  closeWalletSelector,
+}) => {
   const { connect, connectors } = useConnectors();
   function connectWallet(connector: Connector): void {
     connect(connector);
@@ -45,4 +47,6 @@ export default function WalletSelector({
       })}
     </div>
   );
-}
+};
+
+export default WalletSelector;

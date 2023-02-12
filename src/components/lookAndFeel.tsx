@@ -1,6 +1,6 @@
 import styles from "@/styles/components/Steps.module.css";
 import { useAccount } from "@starknet-react/core";
-import { ReactElement, useState } from "react";
+import { FunctionComponent, ReactElement, useState } from "react";
 import ErrorNotification from "./notifications/errorNotification";
 import SuccessNotification from "./notifications/successNotification copy";
 import WarningNotification from "./notifications/warningNotification";
@@ -13,7 +13,11 @@ type LookAndFeelProps = {
   setMenu: (menu: ReactElement | null) => void;
 };
 
-const LookAndFeel = ({ setTokenURI, setMenu, ...props }: LookAndFeelProps) => {
+const LookAndFeel: FunctionComponent<LookAndFeelProps> = ({
+  setTokenURI,
+  setMenu,
+  ...props
+}) => {
   const [name, setName] = useState<string>("");
   const [desc, setDesc] = useState<string>("");
   const [element, setElement] = useState<ReactElement | null>(null);
