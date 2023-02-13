@@ -136,11 +136,7 @@ const Deploy: FunctionComponent<DeployProps> = ({
   return (
     <>
       <div className={styles.list}>
-        <TextField
-          className={styles.textField}
-          label="Admin"
-          defaultValue={address}
-        />
+        <TextField label="Admin" defaultValue={address} />
         <br />
         <TextField
           error={clickedDeploy && !password}
@@ -148,7 +144,6 @@ const Deploy: FunctionComponent<DeployProps> = ({
             clickedDeploy && !password ? "Please enter a password" : ""
           }
           type="password"
-          className={styles.textField}
           label="SBT password"
           onChange={(e) => setPassword(e.target.value)}
         />

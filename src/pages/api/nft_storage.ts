@@ -60,9 +60,15 @@ export const config = {
   },
 };
 
+type ApiResponse = {
+  message: string;
+  ipnft?: string;
+  url?: string;
+};
+
 export default async function uploadToIpfs(
   req: NextApiRequest,
-  res: NextApiResponse<{ message: string; ipnft?: string; url?: string }>
+  res: NextApiResponse<ApiResponse>
 ) {
   const form = formidable({ multiples: true });
 

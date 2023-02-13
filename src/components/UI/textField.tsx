@@ -10,7 +10,6 @@ type TextFieldProps = {
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   required?: boolean;
   type?: string;
-  className?: string;
 };
 
 const TextField: FunctionComponent<TextFieldProps> = ({
@@ -35,7 +34,6 @@ const TextField: FunctionComponent<TextFieldProps> = ({
       onChange={onChange || (() => {})}
       color="secondary"
       required={required}
-      {...props}
       key={label + defaultValue}
     />
   );
