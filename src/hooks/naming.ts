@@ -47,8 +47,8 @@ export function useDecoded(encoded: BN[]): string {
         str +
         (k % 2 == 0
           ? bigAlphabet[bigAlphabet.length - 1].repeat(k / 2 - 1) +
-          bigAlphabet[0] +
-          basicAlphabet[1]
+            bigAlphabet[0] +
+            basicAlphabet[1]
           : bigAlphabet[bigAlphabet.length - 1].repeat((k - 1) / 2 + 1));
     decoded += ".";
   }
@@ -117,7 +117,6 @@ export function useDecodedSeveral(domains: BN[][]): string[] {
   });
   return encodedArray;
 }
-
 
 export function useDomainFromAddress(address: string | BN | undefined): string {
   const { contract } = useNamingContract();

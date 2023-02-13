@@ -1,36 +1,42 @@
 import { TextField as TextFieldMUI } from "@mui/material";
-import { FunctionComponent, ReactNode } from "react";
+import { ChangeEvent, FunctionComponent } from "react";
+
 type TextFieldProps = {
-    label: string;
-    id?: string;
-    defaultValue?: string;
-    onChange?: (e: any) => void;
-    required?: boolean;
-    [key: string]: any;
+  error?: boolean;
+  label: string;
+  id?: string;
+  helperText?: string;
+  defaultValue?: string;
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+  required?: boolean;
+  type?: string;
 };
 
 const TextField: FunctionComponent<TextFieldProps> = ({
-    label,
-    id,
-    defaultValue,
-    onChange,
-    required,
-    ...props
+  error,
+  label,
+  id,
+  helperText,
+  defaultValue,
+  onChange,
+  required,
+  ...props
 }) => {
   return (
-        <TextFieldMUI
-            fullWidth
-            label={label}
-            id={id || "outlined-basic"}
-            defaultValue={defaultValue}
-            variant="outlined"
-            onChange={onChange || (() => { })}
-            color="secondary"
-            required={required}
-            {...props}
-            key={label + defaultValue}
-        />
-  )
+    <TextFieldMUI
+      error={error}
+      fullWidth
+      label={label}
+      id={id || "outlined-basic"}
+      helperText={helperText}
+      defaultValue={defaultValue}
+      variant="outlined"
+      onChange={onChange || (() => {})}
+      color="secondary"
+      required={required}
+      key={label + defaultValue}
+    />
+  );
 };
 
 export default TextField;
