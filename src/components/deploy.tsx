@@ -26,10 +26,6 @@ type TransactionDatas = {
   status: string;
 };
 
-type InvokeFunctionResponseImproved = InvokeFunctionResponse & {
-  code: string;
-};
-
 const Deploy: FunctionComponent<DeployProps> = ({
   tokenURI,
   setMenu,
@@ -128,7 +124,7 @@ const Deploy: FunctionComponent<DeployProps> = ({
         />
       );
     execute().then((tx) => {
-      setLoadingMessage((tx as InvokeFunctionResponseImproved).code);
+      setLoadingMessage((tx as any).code);
       setTransactionHash(tx.transaction_hash);
     });
   };
