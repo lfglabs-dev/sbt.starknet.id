@@ -8,7 +8,6 @@ import Loading from "./UI/loading";
 import TextField from "./UI/textField";
 
 type LookAndFeelProps = {
-  [key: string]: any;
   setTokenURI: (tokenURI: string) => void;
   setMenu: (menu: ReactElement | null) => void;
 };

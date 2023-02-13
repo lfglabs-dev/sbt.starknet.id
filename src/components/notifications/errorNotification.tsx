@@ -2,10 +2,10 @@ import { Alert } from "@mui/material";
 import styles from "@/styles/components/Notification.module.css";
 import { FunctionComponent, ReactElement, useEffect } from "react";
 
-interface ErrorNotificationProps {
+type ErrorNotificationProps = {
   message: string;
   setMenu: (menu: ReactElement | null) => void;
-}
+};
 
 const ErrorNotification: FunctionComponent<ErrorNotificationProps> = ({
   message,

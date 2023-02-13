@@ -7,7 +7,7 @@ import {
 } from "@starknet-react/core";
 import BN from "bn.js";
 import { ReactElement, useEffect, useState, FunctionComponent } from "react";
-import { ec } from "starknet";
+import { ec, GetTransactionResponse, InvokeFunctionResponse } from "starknet";
 import { stringToFelt } from "../../utils/felt";
 import Button from "./UI/button";
 import LoadingScreen from "./UI/screens/loadingScreen";
@@ -20,6 +20,14 @@ type DeployProps = {
   setTransactionHash: (transactionHash: string) => void;
   transactionHash: string;
   setFinalStep: (finalStep: boolean) => void;
+};
+
+type TransactionDatas = {
+  status: string;
+};
+
+type InvokeFunctionResponseImproved = InvokeFunctionResponse & {
+  code: string;
 };
 
 const Deploy: FunctionComponent<DeployProps> = ({
@@ -39,7 +47,7 @@ const Deploy: FunctionComponent<DeployProps> = ({
 
   useEffect(() => {
     if (!data) return;
-    const status = (data as any).status;
+    const status = (data as GetTransactionResponse & TransactionDatas).status;
     setLoadingMessage(status);
     if (status === "ACCEPTED_ON_L2" || status === "ACCEPTED_ON_L1") {
       setLoadingMessage("");
@@ -120,7 +128,7 @@ const Deploy: FunctionComponent<DeployProps> = ({
         />
       );
     execute().then((tx) => {
-      setLoadingMessage((tx as any).code);
+      setLoadingMessage((tx as InvokeFunctionResponseImproved).code);
       setTransactionHash(tx.transaction_hash);
     });
   };
