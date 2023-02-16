@@ -1,111 +1,114 @@
 .list {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .line {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.line input, .line label {
-    margin-left: 10px;
-    width: calc(100% - 10px);
+.line input,
+.line label {
+  margin-left: 10px;
+  width: calc(100% - 10px);
 }
 
 .inputContainer {
-    width: 100%;
+  width: 100%;
 }
 
 .nextButton {
-    display: block;
-    width: fit-content;
-    margin: 30px auto;
+  display: block;
+  width: fit-content;
+  margin: 30px auto;
 }
 
 @media screen and (max-width: 800px) {
-    .line input, .line label {
-        width: calc(100% - 15px);
-    }
-    .nextButton {
-        margin: 30px auto 0 auto;
-    }
+  .line input,
+  .line label {
+    width: calc(100% - 15px);
+  }
+  .nextButton {
+    margin: 30px auto 0 auto;
+  }
 }
 
-input[type="text"].input, input[type="password"].input {
-    border-radius: 5px;
-    padding: 13px;
-    font-family: "Lato", sans-serif;
-    font-weight: 500;
-    outline: none;
-    transition: all 0.3s ease;
-    border: none;
-    background-color: var(--beige);
-    color: var(--brown);
+input[type="text"].input,
+input[type="password"].input {
+  border-radius: 5px;
+  padding: 13px;
+  font-family: "Lato", sans-serif;
+  font-weight: 500;
+  outline: none;
+  transition: all 0.3s ease;
+  border: none;
+  background-color: var(--beige);
+  color: var(--brown);
 }
-  
+
 input[type="date"].input {
-    border-radius: 5px;
-    padding: 13px;
-    font-family: "Lato", sans-serif;
-    font-weight: 500;
-    outline: none;
-    transition: all 0.3s ease;
-    color: var(--brown);
-    background-color: transparent;
-    border: 1px solid rgb(195, 195, 195);
+  border-radius: 5px;
+  padding: 13px;
+  font-family: "Lato", sans-serif;
+  font-weight: 500;
+  outline: none;
+  transition: all 0.3s ease;
+  color: var(--brown);
+  background-color: transparent;
+  border: 1px solid rgb(195, 195, 195);
 }
 
 input[type="date"].input:hover {
-    border: 1px solid var(--brown);
+  border: 1px solid var(--brown);
 }
-  
+
 input[type="file"].input {
-    width: 0.1px;
-    height: 0.1px;
-    opacity: 0;
-    overflow: hidden;
-    position: absolute;
-    z-index: -1;
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
 }
-  
+
 input[type="file"].input + label {
-    position: relative;
-    height: 3rem;
-    color: var(--beige);
-    font-size: 1rem;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 0.094em;
-    border: none;
-    padding: 0 2rem;
-    border-radius: 500px;
-    margin: 0.25rem;
-    box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.15);
-    cursor: pointer;
-    transition: transform 450ms var(--nimiq-ease),
-        box-shadow 450ms var(--nimiq-ease);
-    will-change: box-shadow;
-    text-decoration: none;
-    display: block;
-    text-align: center;
-    font-family: "Montserrat-SemiBold", sans-serif;
-    background-color: var(--green);
-    line-height: 47px;
-    width: fit-content;
-    display: block;
-    margin: 0 auto;
+  position: relative;
+  height: 3rem;
+  color: var(--beige);
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.094em;
+  border: none;
+  padding: 0 2rem;
+  border-radius: 500px;
+  margin: 0.25rem;
+  box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  transition: transform 450ms var(--nimiq-ease),
+    box-shadow 450ms var(--nimiq-ease);
+  will-change: box-shadow;
+  text-decoration: none;
+  display: block;
+  text-align: center;
+  font-family: "Montserrat-SemiBold", sans-serif;
+  background-color: var(--green);
+  line-height: 47px;
+  width: fit-content;
+  display: block;
+  margin: 0 auto;
 }
 
 @media screen and (max-width: 420px) {
-    input[type="file"].input + label {
-        font-size: .75rem;
-        width: 100%;
-    }
+  input[type="file"].input + label {
+    font-size: 0.75rem;
+    width: 100%;
+  }
 }
 
 input[type="file"].input:focus + label,
@@ -115,15 +118,15 @@ input[type="file"].input + label:hover {
 }
 
 .loadingContainer {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 20px;
-    backdrop-filter: blur(5px);
-    z-index: 100;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  backdrop-filter: blur(5px);
+  z-index: 100;
 }

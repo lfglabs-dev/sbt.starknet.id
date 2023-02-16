@@ -30,7 +30,7 @@
   width: 500px;
 }
 
-.formSideImage {
+/* .formSideImage {
   width: 300px;
   height: 100%;
   border-radius: 20px;
@@ -38,7 +38,7 @@
   background-image: url("/visuals/sbtIllustration.webp");
   background-size: cover;
   background-position: center;
-}
+} */
 
 .title {
   font-size: 1.5em;

@@ -1,16 +1,16 @@
 .container {
-    position: fixed;
-    bottom: 10px;
-    right: 10px;
-    animation: slideIn 0.2s ease-in-out;
-    z-index: 1000;
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  animation: slideIn 0.2s ease-in-out;
+  z-index: 1000;
 }
 
 @keyframes slideIn {
-    0% {
-        transform: translateX(100%);
-    }
-    100% {
-        transform: translateX(0);
-    }
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }

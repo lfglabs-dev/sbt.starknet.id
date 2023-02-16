@@ -1,6 +1,6 @@
 import React from "react";
 import { FunctionComponent } from "react";
-import styles from '@/styles/components/connection/WalletSelector.module.css'
+import styles from "@/styles/components/connection/WalletSelector.module.css";
 
 type WalletIconsProps = {
   id: string;

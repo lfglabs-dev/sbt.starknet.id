@@ -1,4 +1,4 @@
-import styles from "@/styles/Home.module.css"
+import styles from "@/styles/Home.module.css";
 import React, { ReactElement, useState } from "react";
 import LookAndFeel from "@/components/lookAndFeel";
 import { useAccount } from "@starknet-react/core";
@@ -15,20 +15,26 @@ export default function Home() {
     <main className={styles.page}>
       <section className={styles.formContainer}>
         <form onSubmit={(e) => e.preventDefault()} className={styles.form}>
-          <div className={[styles.sidesContainer, !address ? styles.blur : ""].join(" ")}>
+          <div
+            className={[
+              styles.sidesContainer,
+              !address ? styles.blur : "",
+            ].join(" ")}
+          >
             <div className={styles.formSideImage} />
             <div className={styles.formFields}>
               <h1 className={styles.title}>sbtmaker</h1>
-              {
-                !tokenURI ? <LookAndFeel setMenu={setMenu} setTokenURI={setTokenURI} />
-                : <Deploy setMenu={setMenu} tokenURI={tokenURI} />
-              }
+              {!tokenURI ? (
+                <LookAndFeel setMenu={setMenu} setTokenURI={setTokenURI} />
+              ) : (
+                <Deploy setMenu={setMenu} tokenURI={tokenURI} />
+              )}
             </div>
           </div>
-          { !address ? <Connect /> : <NetworkSelector /> }
+          {!address ? <Connect /> : <NetworkSelector />}
         </form>
       </section>
       {menu}
     </main>
-  )
+  );
 }
