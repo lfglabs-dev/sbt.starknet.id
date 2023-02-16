@@ -56,3 +56,15 @@
     margin: -7px -2px 2px;
   }
 }
+
+.buttonContainer {
+  margin-top: 1.25rem;
+  display: flex;
+  justify-content: center;
+}
+
+.flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

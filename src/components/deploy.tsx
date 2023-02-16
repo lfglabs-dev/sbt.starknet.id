@@ -6,41 +6,54 @@ import {
   useTransaction,
 } from "@starknet-react/core";
 import BN from "bn.js";
-import { ReactElement, useEffect, useState } from "react";
-import { ec } from "starknet";
+import { ReactElement, useEffect, useState, FunctionComponent } from "react";
+import { ec, GetTransactionResponse, InvokeFunctionResponse } from "starknet";
 import { stringToFelt } from "../../utils/felt";
 import Button from "./UI/button";
 import LoadingScreen from "./UI/screens/loadingScreen";
 import ErrorNotification from "./notifications/errorNotification";
 import SuccessNotification from "./notifications/successNotification copy";
 
-interface DeployProps {
+type DeployProps = {
   tokenURI: string;
   setMenu: (element: ReactElement | null) => void;
-}
+  setTransactionHash: (transactionHash: string) => void;
+  transactionHash: string;
+  setFinalStep: (finalStep: boolean) => void;
+};
 
-export default function Deploy({ tokenURI, setMenu }: DeployProps) {
+type TransactionDatas = {
+  status: string;
+};
+
+const Deploy: FunctionComponent<DeployProps> = ({
+  tokenURI,
+  setMenu,
+  setTransactionHash,
+  transactionHash,
+  setFinalStep,
+}) => {
   const [publicKey, setPublicKey] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [element, setElement] = useState<ReactElement | null>(null);
   const [loadingMessage, setLoadingMessage] = useState<string>("");
-  const [transactionHash, setTransactionHash] = useState<string>("");
   const [clickedDeploy, setClickedDeploy] = useState<boolean>(false);
   const { data, loading, error } = useTransaction({ hash: transactionHash });
   const { address } = useAccount();
 
   useEffect(() => {
     if (!data) return;
-    const status = (data as any).status;
+    const status = (data as GetTransactionResponse & TransactionDatas).status;
     setLoadingMessage(status);
     if (status === "ACCEPTED_ON_L2" || status === "ACCEPTED_ON_L1") {
       setLoadingMessage("");
-      setElement(
+      setMenu(
         <SuccessNotification
-          setMenu={setElement}
-          message={"Poap contract deployed successfully"}
+          setMenu={setMenu}
+          message={"SBT contract deployed successfully"}
         />
       );
+      setFinalStep(true);
     }
   }, [data, loading, error]);
 
@@ -107,7 +120,7 @@ export default function Deploy({ tokenURI, setMenu }: DeployProps) {
       return setMenu(
         <ErrorNotification
           setMenu={setMenu}
-          message={"Please enter a password for your poap"}
+          message={"Please enter a password for your SBT"}
         />
       );
     execute().then((tx) => {
@@ -119,11 +132,7 @@ export default function Deploy({ tokenURI, setMenu }: DeployProps) {
   return (
     <>
       <div className={styles.list}>
-        <TextField
-          className={styles.textField}
-          label="Admin"
-          defaultValue={address}
-        />
+        <TextField label="Admin" defaultValue={address} />
         <br />
         <TextField
           error={clickedDeploy && !password}
@@ -131,8 +140,7 @@ export default function Deploy({ tokenURI, setMenu }: DeployProps) {
             clickedDeploy && !password ? "Please enter a password" : ""
           }
           type="password"
-          className={styles.textField}
-          label="Poap password"
+          label="SBT password"
           onChange={(e) => setPassword(e.target.value)}
         />
         <br />
@@ -158,4 +166,6 @@ export default function Deploy({ tokenURI, setMenu }: DeployProps) {
       {element}
     </>
   );
-}
+};
+
+export default Deploy;

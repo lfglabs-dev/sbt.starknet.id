@@ -1,11 +1,7 @@
 import React, { FunctionComponent } from "react";
 import { MutatingDots } from "react-loader-spinner";
 
-interface LoadingProps {
-  [key: string]: any;
-}
-
-const Loading: FunctionComponent<LoadingProps> = (props) => {
+const Loading: FunctionComponent = () => {
   return (
     <MutatingDots
       height="100"
@@ -13,7 +9,6 @@ const Loading: FunctionComponent<LoadingProps> = (props) => {
       color="#19AA6E"
       secondaryColor="#BF9E7B"
       ariaLabel="loading"
-      {...props}
     />
   );
 };

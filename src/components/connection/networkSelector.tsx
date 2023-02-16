@@ -1,13 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, FunctionComponent } from "react";
 import { useConnectors, useAccount, useStarknet } from "@starknet-react/core";
 import Button from "../UI/button";
 import ModalMessage from "../UI/modalMessage";
 import styles from "@/styles/components/connection/networkSelector.module.css";
 
-export default function NetworkSelector() {
-  // connection
-  const [isWrongNetwork, setIsWrongNetwork] = useState(false);
+type NetworkSelectorProps = {
+  isWrongNetwork: boolean;
+  setIsWrongNetwork: (isWrongNetwork: boolean) => void;
+};
 
+const NetworkSelector: FunctionComponent<NetworkSelectorProps> = ({
+  isWrongNetwork,
+  setIsWrongNetwork,
+}) => {
   // starknet-react
   const { address } = useAccount();
   const { disconnect } = useConnectors();
@@ -15,7 +20,6 @@ export default function NetworkSelector() {
 
   useEffect(() => {
     if (!address) return;
-
     const STARKNET_NETWORK = {
       mainnet: "0x534e5f4d41494e",
       testnet: "0x534e5f474f45524c49",
@@ -58,4 +62,6 @@ export default function NetworkSelector() {
       }
     />
   ) : null;
-}
+};
+
+export default NetworkSelector;

@@ -4,7 +4,7 @@ import Button from "../UI/button";
 import ModalMessage from "../UI/modalMessage";
 import styles from "@/styles/components/connection/networkSelector.module.css";
 
-export type SbtNetworkSelectorProps = {
+type SbtNetworkSelectorProps = {
   isMainnet: boolean;
 };
 

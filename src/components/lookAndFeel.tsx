@@ -1,23 +1,22 @@
 import styles from "@/styles/components/Steps.module.css";
 import { useAccount } from "@starknet-react/core";
-import { ReactElement, useState } from "react";
+import { FunctionComponent, ReactElement, useState } from "react";
 import ErrorNotification from "./notifications/errorNotification";
 import SuccessNotification from "./notifications/successNotification copy";
 import WarningNotification from "./notifications/warningNotification";
 import Loading from "./UI/loading";
 import TextField from "./UI/textField";
 
-interface LookAndFeelProps {
-  [key: string]: any;
+type LookAndFeelProps = {
   setTokenURI: (tokenURI: string) => void;
   setMenu: (menu: ReactElement | null) => void;
-}
+};
 
-export default function LookAndFeel({
+const LookAndFeel: FunctionComponent<LookAndFeelProps> = ({
   setTokenURI,
   setMenu,
   ...props
-}: LookAndFeelProps) {
+}) => {
   const [name, setName] = useState<string>("");
   const [desc, setDesc] = useState<string>("");
   const [element, setElement] = useState<ReactElement | null>(null);
@@ -124,4 +123,6 @@ export default function LookAndFeel({
       {element}
     </div>
   );
-}
+};
+
+export default LookAndFeel;

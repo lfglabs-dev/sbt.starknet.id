@@ -4,11 +4,13 @@ import LookAndFeel from "@/components/lookAndFeel";
 import { useAccount } from "@starknet-react/core";
 import Deploy from "@/components/deploy";
 import Connect from "@/components/connection/connect";
-import NetworkSelector from "@/components/connection/networkSelector";
+import Success from "@/components/success";
 
 export default function Home() {
   const [tokenURI, setTokenURI] = useState<string>("");
   const [menu, setMenu] = useState<ReactElement | null>(null);
+  const [transactionHash, setTransactionHash] = useState<string>("");
+  const [finalStep, setFinalStep] = useState<boolean>(false);
   const { address } = useAccount();
 
   return (
@@ -24,14 +26,22 @@ export default function Home() {
             <div className={styles.formSideImage} />
             <div className={styles.formFields}>
               <h1 className={styles.title}>sbtmaker</h1>
-              {!tokenURI ? (
+              {finalStep ? (
+                <Success transactionHash={transactionHash} />
+              ) : !tokenURI ? (
                 <LookAndFeel setMenu={setMenu} setTokenURI={setTokenURI} />
               ) : (
-                <Deploy setMenu={setMenu} tokenURI={tokenURI} />
+                <Deploy
+                  setMenu={setMenu}
+                  tokenURI={tokenURI}
+                  transactionHash={transactionHash}
+                  setTransactionHash={setTransactionHash}
+                  setFinalStep={setFinalStep}
+                />
               )}
             </div>
           </div>
-          {!address ? <Connect /> : <NetworkSelector />}
+          <Connect />
         </form>
       </section>
       {menu}

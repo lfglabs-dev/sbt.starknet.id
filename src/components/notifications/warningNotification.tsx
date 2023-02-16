@@ -1,16 +1,16 @@
 import { Alert } from "@mui/material";
 import styles from "@/styles/components/Notification.module.css";
-import { ReactElement, useEffect } from "react";
+import { FunctionComponent, ReactElement, useEffect } from "react";
 
-interface WarningNotificationProps {
+type WarningNotificationProps = {
   message: string;
   setMenu: (menu: ReactElement | null) => void;
-}
+};
 
-export default function WarningNotification({
+const WarningNotification: FunctionComponent<WarningNotificationProps> = ({
   message,
   setMenu,
-}: WarningNotificationProps) {
+}) => {
   useEffect(() => {
     setTimeout(() => setMenu(null), 4000);
   }, []);
@@ -20,4 +20,6 @@ export default function WarningNotification({
       {message}
     </Alert>
   );
-}
+};
+
+export default WarningNotification;

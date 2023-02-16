@@ -1,16 +1,16 @@
 import { Alert } from "@mui/material";
 import styles from "@/styles/components/Notification.module.css";
-import { ReactElement, useEffect } from "react";
+import { FunctionComponent, ReactElement, useEffect } from "react";
 
-interface SuccessNotificationProps {
+type SuccessNotificationProps = {
   message: string;
   setMenu: (menu: ReactElement | null) => void;
-}
+};
 
-export default function SuccessNotification({
+const SuccessNotification: FunctionComponent<SuccessNotificationProps> = ({
   message,
   setMenu,
-}: SuccessNotificationProps) {
+}) => {
   useEffect(() => {
     setTimeout(() => setMenu(null), 4000);
   }, []);
@@ -20,4 +20,6 @@ export default function SuccessNotification({
       {message}
     </Alert>
   );
-}
+};
+
+export default SuccessNotification;
