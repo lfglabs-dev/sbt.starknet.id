@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prettier": "prettier --write '**/*.{ts,tsx,css}'"
   },
   "dependencies": {
     "@emotion/react": "^11.10.0",
@@ -19,12 +20,12 @@
     "@types/react": "18.0.27",
     "@types/react-dom": "18.0.10",
     "bn.js": "^5.2.1",
-    "eslint": "8.33.0",
     "eslint-config-next": "13.1.6",
     "formidable": "^2.1.1",
     "mime": "^3.0.0",
     "next": "13.1.6",
     "nft.storage": "^7.0.0",
+    "prettier": "^2.8.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-loader-spinner": "^5.3.4",
@@ -33,6 +34,10 @@
   },
   "devDependencies": {
     "@types/bn.js": "^5.1.1",
-    "@types/formidable": "^2.0.5"
+    "@types/formidable": "^2.0.5",
+    "@typescript-eslint/eslint-plugin": "^5.51.0",
+    "@typescript-eslint/parser": "^5.51.0",
+    "eslint": "^8.33.0",
+    "eslint-plugin-react": "^7.32.2"
   }
 }
