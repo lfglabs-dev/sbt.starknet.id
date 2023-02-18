@@ -1,5 +1,5 @@
 import { Alert } from "@mui/material";
-import styles from "@/styles/components/Notification.module.css";
+import styles from "@/styles/components/notification.module.css";
 import { FunctionComponent, ReactElement, useEffect } from "react";
 
 type ErrorNotificationProps = {

@@ -1,4 +1,4 @@
-import styles from "@/styles/components/Steps.module.css";
+import styles from "@/styles/components/steps.module.css";
 import { useAccount } from "@starknet-react/core";
 import { FunctionComponent, ReactElement, useState } from "react";
 import ErrorNotification from "./notifications/errorNotification";

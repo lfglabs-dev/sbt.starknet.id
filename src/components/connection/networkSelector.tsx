@@ -2,7 +2,7 @@ import React, { useEffect, FunctionComponent } from "react";
 import { useConnectors, useAccount, useStarknet } from "@starknet-react/core";
 import Button from "../UI/button";
 import ModalMessage from "../UI/modalMessage";
-import styles from "@/styles/components/connection/NetworkSelector.module.css";
+import styles from "@/styles/components/connection/networkSelector.module.css";
 
 type NetworkSelectorProps = {
   isWrongNetwork: boolean;
