@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useState } from "react";
 import { useConnectors, useAccount } from "@starknet-react/core";
 import { useDisplayName } from "@/hooks/displayname";
-import styles from "@/styles/components/connection/Connect.module.css";
+import styles from "@/styles/components/connection/connect.module.css";
 import Button from "../UI/button";
 import Wallets from "../UI/wallets";
 import NetworkSelector from "@/components/connection/networkSelector";
