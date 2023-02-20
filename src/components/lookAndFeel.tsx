@@ -1,4 +1,4 @@
-import styles from "@/styles/components/Steps.module.css";
+import styles from "@/styles/components/steps.module.css";
 import { useAccount } from "@starknet-react/core";
 import { FunctionComponent, ReactElement, useState } from "react";
 import ErrorNotification from "./notifications/errorNotification";
@@ -97,7 +97,6 @@ const LookAndFeel: FunctionComponent<LookAndFeelProps> = ({
           error={clickedNext && !name}
           helperText={clickedNext && !name ? "Please enter a name" : ""}
           onChange={(e) => setName(e.target.value)}
-          className={styles.textField}
           label="Name"
           id="name"
         />
@@ -106,7 +105,6 @@ const LookAndFeel: FunctionComponent<LookAndFeelProps> = ({
           error={clickedNext && !desc}
           helperText={clickedNext && !desc ? "Please enter a description" : ""}
           onChange={(e) => setDesc(e.target.value)}
-          className={styles.textField}
           label="Description"
           id="description"
         />

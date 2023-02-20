@@ -1,4 +1,4 @@
-import styles from "@/styles/Home.module.css";
+import styles from "@/styles/home.module.css";
 import React, { ReactElement, useState } from "react";
 import LookAndFeel from "@/components/lookAndFeel";
 import { useAccount } from "@starknet-react/core";

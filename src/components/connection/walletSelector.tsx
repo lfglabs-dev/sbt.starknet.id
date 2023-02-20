@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from "react";
 import { Connector, useConnectors } from "@starknet-react/core";
 import WalletIcons from "./walletIcons";
-import styles from "@/styles/components/connection/WalletSelector.module.css";
+import styles from "@/styles/components/connection/walletSelector.module.css";
 
 type WalletSelectorProps = {
   closeWalletSelector: () => void;

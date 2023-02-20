@@ -1,4 +1,4 @@
-import styles from "@/styles/components/Steps.module.css";
+import styles from "@/styles/components/steps.module.css";
 import TextField from "./UI/textField";
 import {
   useAccount,
