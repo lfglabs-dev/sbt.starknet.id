@@ -15,7 +15,6 @@ import Connect from "@/components/connection/connect";
 import styles from "../styles/SbtGenerator.module.css";
 import sbt_abi from "@/abi/starknet/sbt_abi.json";
 import { TextField } from "@mui/material";
-import SbtNetworkSelector from "@/components/connection/sbtNetworkSelector";
 
 type MetadataProps = {
   name: string;
@@ -31,10 +30,9 @@ type CallDataProps = {
 
 const SbtGenerator: NextPage = () => {
   const router = useRouter();
-  const { SbtAddress, network } = router.query;
+  const { SbtAddress } = router.query;
 
   const { account, address } = useAccount();
-  const [isMainnet, setIsMainnet] = useState<boolean>(true);
   const [contractAddress, setContractAddress] = useState<string>("");
   const [privateKey, setPrivateKey] = useState<BN>();
   const [tokenId, setTokenId] = useState<string>("0");
@@ -59,13 +57,9 @@ const SbtGenerator: NextPage = () => {
   });
 
   useEffect(() => {
-    if (network === "testnet") {
-      setIsMainnet(false);
-    }
     setContractAddress(SbtAddress as string);
-  }, [SbtAddress, network]);
+  }, [SbtAddress]);
 
-  // Fetch info from contract
   useEffect(() => {
     if (!sbtData && data) {
       let dataUri = "";
@@ -108,11 +102,8 @@ const SbtGenerator: NextPage = () => {
         ? []
         : [
             {
-              contractAddress: isMainnet
-                ? (process.env
-                    .NEXT_PUBLIC_STARKNETID_CONTRACT_MAINNET as string)
-                : (process.env
-                    .NEXT_PUBLIC_STARKNETID_CONTRACT_TESTNET as string),
+              contractAddress: process.env
+                .NEXT_PUBLIC_STARKNETID_CONTRACT as string,
               entrypoint: "mint",
               calldata: [actualTokenId],
             },
@@ -131,9 +122,7 @@ const SbtGenerator: NextPage = () => {
       ],
     });
     calls.push({
-      contractAddress: isMainnet
-        ? (process.env.NEXT_PUBLIC_STARKNETID_CONTRACT_MAINNET as string)
-        : (process.env.NEXT_PUBLIC_STARKNETID_CONTRACT_TESTNET as string),
+      contractAddress: process.env.NEXT_PUBLIC_STARKNETID_CONTRACT as string,
       entrypoint: "equip",
       calldata: [contractAddress, sbt_id.toString()],
     });
@@ -184,7 +173,11 @@ const SbtGenerator: NextPage = () => {
             ) : (
               <>
                 <h1 className={styles.title}>
-                  {sbtData ? sbtData?.name : "Fetching SBT data..."}
+                  {sbtData && !loading && !error
+                    ? sbtData?.name
+                    : loading && !error
+                    ? "Fetching SBT data..."
+                    : "SBT not found"}
                 </h1>
                 <p className={styles.text}>
                   {sbtData
@@ -218,7 +211,7 @@ const SbtGenerator: NextPage = () => {
             )}
           </div>
         </div>
-        {!address ? <Connect /> : <SbtNetworkSelector isMainnet={isMainnet} />}
+        {!address ? <Connect /> : null}
       </main>
     </>
   );
