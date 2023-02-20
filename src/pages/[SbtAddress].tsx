@@ -12,7 +12,7 @@ import { ec, hash } from "starknet";
 import Button from "@/components/UI/button";
 import SelectIdentity from "@/components/selectIdentity";
 import Connect from "@/components/connection/connect";
-import styles from "../styles/SbtGenerator.module.css";
+import styles from "@/styles/generator.module.css";
 import sbt_abi from "@/abi/starknet/sbt_abi.json";
 import { TextField } from "@mui/material";
 
