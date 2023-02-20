@@ -53,11 +53,15 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  max-width: 410px;
+  width: 100%;
 }
 
 .text {
   margin-top: 1.25rem;
   color: var(--title);
+  word-wrap: break-word;
+  max-width: 100%;
 }
 
 .formSideImage {

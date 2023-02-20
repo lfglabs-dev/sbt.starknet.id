@@ -3,22 +3,24 @@ import {
   useContract,
   useStarknetCall,
   useStarknetExecute,
+  useTransaction,
 } from "@starknet-react/core";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import React, { ReactElement, useEffect, useState } from "react";
 import BN from "bn.js";
-import { ec, hash } from "starknet";
+import { ec, GetTransactionResponse, hash } from "starknet";
 import Button from "@/components/UI/button";
 import SelectIdentity from "@/components/selectIdentity";
 import Connect from "@/components/connection/connect";
 import styles from "@/styles/generator.module.css";
 import sbt_abi from "@/abi/starknet/sbt_abi.json";
 import { TextField } from "@mui/material";
+import LoadingScreen from "@/components/UI/screens/loadingScreen";
 
 type MetadataProps = {
   name: string;
-  desc: string;
+  description: string;
   image: string;
 };
 
@@ -26,6 +28,10 @@ type CallDataProps = {
   calldata: (string | number)[];
   contractAddress: string;
   entrypoint: string;
+};
+
+type TransactionDatas = {
+  status: string;
 };
 
 const SbtGenerator: NextPage = () => {
@@ -39,6 +45,16 @@ const SbtGenerator: NextPage = () => {
   const [password, setPassword] = useState<string>("");
   const [sbtData, setSbtData] = useState<MetadataProps>();
   const [callData, setCallData] = useState<CallDataProps[]>();
+  const [element, setElement] = useState<ReactElement | null>(null);
+  const [loadingMessage, setLoadingMessage] = useState<string>("");
+  const [clickedMint, setClickedMint] = useState<boolean>(false);
+  const [transactionHash, setTransactionHash] = useState<string>("");
+  const [finalStep, setFinalStep] = useState<boolean>(false);
+  const {
+    data: transactionData,
+    loading: transactionLoading,
+    error: transactionError,
+  } = useTransaction({ hash: transactionHash });
 
   const { execute } = useStarknetExecute({
     calls: callData,
@@ -47,7 +63,7 @@ const SbtGenerator: NextPage = () => {
     address: contractAddress,
     abi: sbt_abi,
   });
-  const { data, loading, error, refresh } = useStarknetCall({
+  const { data, loading, error } = useStarknetCall({
     contract,
     method: "get_uri",
     args: [1],
@@ -59,6 +75,28 @@ const SbtGenerator: NextPage = () => {
   useEffect(() => {
     setContractAddress(SbtAddress as string);
   }, [SbtAddress]);
+
+  useEffect(() => {
+    if (!loadingMessage) setElement(null);
+    setElement(<LoadingScreen message={loadingMessage} />);
+  }, [loadingMessage]);
+
+  useEffect(() => {
+    if (!loading) setElement(null);
+    if (address && loading && !error) setLoadingMessage("Fetching SBT data");
+  }, [loading, address]);
+
+  useEffect(() => {
+    if (!transactionData || !clickedMint) return;
+    const status = (
+      transactionData as GetTransactionResponse & TransactionDatas
+    ).status;
+    setLoadingMessage(status);
+    if (status === "ACCEPTED_ON_L2" || status === "ACCEPTED_ON_L1") {
+      setLoadingMessage("");
+      setFinalStep(true);
+    }
+  }, [transactionData, transactionLoading, transactionError]);
 
   useEffect(() => {
     if (!sbtData && data) {
@@ -76,8 +114,13 @@ const SbtGenerator: NextPage = () => {
   });
 
   useEffect(() => {
-    if (account && callData && callData.length > 0) execute();
-  }, [callData]);
+    if (account && clickedMint && callData && !finalStep) {
+      execute().then((tx) => {
+        setLoadingMessage((tx as any).code);
+        setTransactionHash(tx.transaction_hash);
+      });
+    }
+  }, [callData, clickedMint]);
 
   function changeTokenId(value: string): void {
     setTokenId(value);
@@ -127,6 +170,7 @@ const SbtGenerator: NextPage = () => {
       calldata: [contractAddress, sbt_id.toString()],
     });
     setCallData(calls);
+    setClickedMint(true);
   }
 
   function handlePassword() {
@@ -160,16 +204,37 @@ const SbtGenerator: NextPage = () => {
           />
           <div className={styles.textSection}>
             {privateKey ? (
-              <>
-                <h1 className={styles.title}>It's almost done</h1>
-                <div className={styles.identitySection}>
-                  <SelectIdentity
-                    tokenId={tokenId}
-                    changeTokenId={changeTokenId}
-                  />
-                  <Button onClick={updateCallData}>Mint my token</Button>
-                </div>
-              </>
+              finalStep ? (
+                <>
+                  <h1 className={styles.title}>
+                    Your SBT was minted successfully
+                  </h1>
+                  <p className={styles.text}>
+                    <a
+                      href={
+                        process.env.NEXT_PUBLIC_NETWORK === "testnet"
+                          ? `https://testnet.starkscan.co/tx/${transactionHash}`
+                          : `https://starkscan.co/tx/${transactionHash}`
+                      }
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      View transaction on Starkscan
+                    </a>
+                  </p>
+                </>
+              ) : (
+                <>
+                  <h1 className={styles.title}>It&apos;s almost done</h1>
+                  <div className={styles.identitySection}>
+                    <SelectIdentity
+                      tokenId={tokenId}
+                      changeTokenId={changeTokenId}
+                    />
+                    <Button onClick={updateCallData}>Mint my token</Button>
+                  </div>
+                </>
+              )
             ) : (
               <>
                 <h1 className={styles.title}>
@@ -181,14 +246,10 @@ const SbtGenerator: NextPage = () => {
                 </h1>
                 <p className={styles.text}>
                   {sbtData
-                    ? sbtData?.desc
-                    : "With Account Abstraction, SBTs on Starknet are broken. It's the reason why the starknet.id team created the Identity Token, a new standard for SBTs on Starknet. Be part of this first experience on Starknet and mint your identity token for the hacker house now !"}{" "}
-                  <a
-                    href="https://github.com/starknet-id/identity_tokens#readme"
-                    className="underline cursor-pointer"
-                  >
-                    (Here is how it works)
-                  </a>
+                    ? sbtData?.description
+                    : !loading && error
+                    ? `We could not find the SBT at ${contractAddress} address, please try another one.`
+                    : null}
                 </p>
                 <div className={styles.password}>
                   {account && sbtData ? (
@@ -212,6 +273,7 @@ const SbtGenerator: NextPage = () => {
           </div>
         </div>
         <Connect />
+        {element}
       </main>
     </>
   );
