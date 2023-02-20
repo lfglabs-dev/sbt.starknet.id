@@ -6,8 +6,13 @@ import {
   useTransaction,
 } from "@starknet-react/core";
 import BN from "bn.js";
-import { ReactElement, useEffect, useState, FunctionComponent } from "react";
-import { ec, GetTransactionResponse, InvokeFunctionResponse } from "starknet";
+import React, {
+  ReactElement,
+  useEffect,
+  useState,
+  FunctionComponent,
+} from "react";
+import { ec, GetTransactionResponse } from "starknet";
 import { stringToFelt } from "../../utils/felt";
 import Button from "./UI/button";
 import LoadingScreen from "./UI/screens/loadingScreen";

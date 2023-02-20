@@ -1,6 +1,6 @@
 import { Alert } from "@mui/material";
 import styles from "@/styles/components/notification.module.css";
-import { FunctionComponent, ReactElement, useEffect } from "react";
+import React, { FunctionComponent, ReactElement, useEffect } from "react";
 
 type SuccessNotificationProps = {
   message: string;

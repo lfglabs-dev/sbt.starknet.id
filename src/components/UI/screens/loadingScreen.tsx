@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactNode } from "react";
+import React, { FunctionComponent } from "react";
 import styles from "@/styles/components/screens/loadingScreen.module.css";
 import Loading from "../loading";
 

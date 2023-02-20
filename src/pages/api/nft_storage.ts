@@ -73,7 +73,7 @@ export default async function uploadToIpfs(
   const form = formidable({ multiples: true });
 
   form.parse(req, async (err, fields, files) => {
-    let filesArr = Object.entries(files);
+    const filesArr = Object.entries(files);
     if (filesArr.length == 0) {
       res.status(400).send({ message: "Please send a file" });
       return;
@@ -81,8 +81,8 @@ export default async function uploadToIpfs(
       res.status(400).send({ message: "Only one file upload is allowed" });
       return;
     }
-    let file = filesArr[0][1] as formidable.File;
-    let result = await storeNFT(
+    const file = filesArr[0][1] as formidable.File;
+    const result = await storeNFT(
       file.filepath,
       fields.name as string,
       fields.desc as string
