@@ -25,6 +25,7 @@
 .identityTokenImage {
   height: 100%;
   width: auto;
+  max-width: 300px;
   border-radius: 20px;
 }
 

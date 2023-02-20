@@ -1,7 +1,6 @@
 import {
   useAccount,
   useContract,
-  useStarknet,
   useStarknetCall,
   useStarknetExecute,
 } from "@starknet-react/core";
@@ -18,13 +17,13 @@ import sbt_abi from "@/abi/starknet/sbt_abi.json";
 import { TextField } from "@mui/material";
 import SbtNetworkSelector from "@/components/connection/sbtNetworkSelector";
 
-export type MetadataProps = {
+type MetadataProps = {
   name: string;
   desc: string;
   image: string;
 };
 
-export type CallDataProps = {
+type CallDataProps = {
   calldata: (string | number)[];
   contractAddress: string;
   entrypoint: string;
@@ -39,13 +38,12 @@ const SbtGenerator: NextPage = () => {
   const [contractAddress, setContractAddress] = useState<string>("");
   const [privateKey, setPrivateKey] = useState<BN>();
   const [tokenId, setTokenId] = useState<string>("0");
-  const [passFailed, setPassFailed] = useState<boolean>(false);
   const [password, setPassword] = useState<string>("");
   const [sbtData, setSbtData] = useState<MetadataProps>();
   const [callData, setCallData] = useState<CallDataProps[]>();
 
   const { execute } = useStarknetExecute({
-    calls: callData as any,
+    calls: callData,
   });
   const { contract } = useContract({
     address: contractAddress,
@@ -71,7 +69,7 @@ const SbtGenerator: NextPage = () => {
   useEffect(() => {
     if (!sbtData && data) {
       let dataUri = "";
-      data[0].forEach((c: any) => {
+      data[0].forEach((c: number) => {
         dataUri += String.fromCharCode(c);
       });
       const metadataUri = dataUri.replace("ipfs://", "https://ipfs.io/ipfs/");
@@ -154,12 +152,7 @@ const SbtGenerator: NextPage = () => {
           "3618502788666131213697322783095070105526743751716087489154079457884512865583"
         )
       );
-      if (privateKey.clone().mod(new BN(5915587277)).toNumber() == 5122445791) {
-        setPrivateKey(privateKey);
-        setPassFailed(false);
-      } else {
-        setPassFailed(true);
-      }
+      setPrivateKey(privateKey);
     })();
   }
 
@@ -210,15 +203,9 @@ const SbtGenerator: NextPage = () => {
                       <TextField
                         fullWidth
                         type="password"
-                        label={
-                          passFailed
-                            ? "Try again it's not the valid password"
-                            : "Password"
-                        }
                         placeholder="Password"
                         variant="outlined"
                         onChange={(e) => changePassword(e.target.value)}
-                        error={passFailed}
                         required
                       />
                       <div className={styles.passwordBtn}>
