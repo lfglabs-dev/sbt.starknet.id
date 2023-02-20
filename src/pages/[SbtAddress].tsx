@@ -211,7 +211,7 @@ const SbtGenerator: NextPage = () => {
             )}
           </div>
         </div>
-        {!address ? <Connect /> : null}
+        <Connect />
       </main>
     </>
   );
