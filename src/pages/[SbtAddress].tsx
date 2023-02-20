@@ -13,10 +13,11 @@ import { ec, GetTransactionResponse, hash } from "starknet";
 import Button from "@/components/UI/button";
 import SelectIdentity from "@/components/selectIdentity";
 import Connect from "@/components/connection/connect";
-import styles from "@/styles/generator.module.css";
+import styles from "@/styles/minting.module.css";
 import sbt_abi from "@/abi/starknet/sbt_abi.json";
 import { TextField } from "@mui/material";
 import LoadingScreen from "@/components/UI/screens/loadingScreen";
+import MintingPageSkeleton from "@/components/mintingPageSkeleton";
 
 type MetadataProps = {
   name: string;
@@ -34,7 +35,7 @@ type TransactionDatas = {
   status: string;
 };
 
-const SbtGenerator: NextPage = () => {
+const SbtMintingPage: NextPage = () => {
   const router = useRouter();
   const { SbtAddress } = router.query;
 
@@ -63,7 +64,7 @@ const SbtGenerator: NextPage = () => {
     address: contractAddress,
     abi: sbt_abi,
   });
-  const { data, loading, error } = useStarknetCall({
+  const { data, loading } = useStarknetCall({
     contract,
     method: "get_uri",
     args: [1],
@@ -77,14 +78,12 @@ const SbtGenerator: NextPage = () => {
   }, [SbtAddress]);
 
   useEffect(() => {
-    if (!loadingMessage) setElement(null);
-    setElement(<LoadingScreen message={loadingMessage} />);
+    if (!loadingMessage) {
+      setElement(null);
+    } else {
+      setElement(<LoadingScreen message={loadingMessage} />);
+    }
   }, [loadingMessage]);
-
-  useEffect(() => {
-    if (!loading) setElement(null);
-    if (address && loading && !error) setLoadingMessage("Fetching SBT data");
-  }, [loading, address]);
 
   useEffect(() => {
     if (!transactionData || !clickedMint) return;
@@ -104,7 +103,10 @@ const SbtGenerator: NextPage = () => {
       data[0].forEach((c: number) => {
         dataUri += String.fromCharCode(c);
       });
-      const metadataUri = dataUri.replace("ipfs://", "https://ipfs.io/ipfs/");
+      const metadataUri = dataUri.replace(
+        "ipfs://",
+        "https://gateway.pinata.cloud/ipfs/"
+      );
       fetch(metadataUri)
         .then((response) => response.json())
         .then((metadata) => {
@@ -211,11 +213,7 @@ const SbtGenerator: NextPage = () => {
                   </h1>
                   <p className={styles.text}>
                     <a
-                      href={
-                        process.env.NEXT_PUBLIC_NETWORK === "testnet"
-                          ? `https://testnet.starkscan.co/tx/${transactionHash}`
-                          : `https://starkscan.co/tx/${transactionHash}`
-                      }
+                      href={`${process.env.NEXT_PUBLIC_STARKSCAN_LINK}/tx/${transactionHash}`}
                       target="_blank"
                       rel="noreferrer"
                     >
@@ -235,21 +233,17 @@ const SbtGenerator: NextPage = () => {
                   </div>
                 </>
               )
+            ) : loading ? (
+              <MintingPageSkeleton />
             ) : (
               <>
                 <h1 className={styles.title}>
-                  {sbtData && !loading && !error
-                    ? sbtData?.name
-                    : loading && !error
-                    ? "Fetching SBT data..."
-                    : "SBT not found"}
+                  {sbtData && !loading ? sbtData?.name : "SBT not found"}
                 </h1>
                 <p className={styles.text}>
-                  {sbtData
+                  {sbtData && !loading
                     ? sbtData?.description
-                    : !loading && error
-                    ? `We could not find the SBT at ${contractAddress} address, please try another one.`
-                    : null}
+                    : `We could not find the SBT at ${contractAddress} address, please try another one.`}
                 </p>
                 <div className={styles.password}>
                   {account && sbtData ? (
@@ -279,4 +273,4 @@ const SbtGenerator: NextPage = () => {
   );
 };
 
-export default SbtGenerator;
+export default SbtMintingPage;

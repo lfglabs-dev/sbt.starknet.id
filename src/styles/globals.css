@@ -12,8 +12,6 @@
   --light-soft-brown: #f2ddbd;
   --beige: #fff9f0;
   --nimiq-ease: cubic-bezier(0.25, 0, 0, 1);
-  --title: #080161;
-  --action: #ff4f08;
 }
 
 @layer base {

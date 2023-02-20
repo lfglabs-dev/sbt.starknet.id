@@ -6,10 +6,6 @@
   background-color: var(--background);
   max-width: 100vw;
   height: 100vh;
-  /* background-image: url("/telAviv.webp");
-    background-size: cover;
-    background-repeat: no-repeat;
-    position: relative; */
 }
 
 .blackFilter {
@@ -42,7 +38,7 @@
 .title {
   font-family: "Montserrat-ExtraBold";
   font-size: 1.8rem;
-  color: var(--title);
+  color: var(--brown);
   text-transform: uppercase;
   text-align: center;
 }
@@ -57,9 +53,13 @@
   width: 100%;
 }
 
+.skeletonSection span {
+  margin-bottom: 30px;
+}
+
 .text {
   margin-top: 1.25rem;
-  color: var(--title);
+  color: var(--brown);
   word-wrap: break-word;
   max-width: 100%;
 }

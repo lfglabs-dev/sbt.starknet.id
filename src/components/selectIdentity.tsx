@@ -33,9 +33,9 @@ const SelectIdentity: FunctionComponent<SelectIdentityProps> = ({
   useEffect(() => {
     if (account) {
       fetch(
-        `https://app.starknet.id/api/indexer/addr_to_full_ids?addr=${hexToFelt(
-          account.address
-        )}`
+        `${
+          process.env.NEXT_PUBLIC_APP_LINK
+        }/api/indexer/addr_to_full_ids?addr=${hexToFelt(account.address)}`
       )
         .then((response) => response.json())
         .then((data) => {
