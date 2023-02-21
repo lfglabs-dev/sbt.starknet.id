@@ -161,7 +161,10 @@ const SbtMintingPage: NextPage = () => {
             className={styles.identityTokenImage}
             src={
               sbtData
-                ? sbtData?.image.replace("ipfs://", "https://ipfs.io/ipfs/")
+                ? sbtData?.image.replace(
+                    "ipfs://",
+                    "https://gateway.pinata.cloud/ipfs/"
+                  )
                 : "/visuals/sbtIllustration.webp"
             }
             alt="SBT image"
