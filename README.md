@@ -10,7 +10,7 @@
 ## What is a SBT?
 
 A SBT is a non transferable token. It can be used to represent something about you of what you did. For example if you participated to the Tel Aviv Starknet hacker house of 2023 you may have claimed your POAP, that you can showcase on your starknet.id profile.
-![screenshot](./screenshot.webp)
+![screenshot](./public/visuals/screenshot.webp)
 
 ## Who is it for?
 

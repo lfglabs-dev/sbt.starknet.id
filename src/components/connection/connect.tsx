@@ -41,7 +41,7 @@ const Connect: FunctionComponent = () => {
           {showWalletSelector ? (
             <Wallets
               hasWallet={Boolean(connectors.length && !isWrongNetwork)}
-              closeWallet={() => setShowWalletSelector(true)}
+              closeWallet={() => setShowWalletSelector(false)}
             />
           ) : (
             <></>
