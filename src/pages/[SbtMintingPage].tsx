@@ -3,20 +3,18 @@ import {
   useContract,
   useStarknetCall,
   useStarknetExecute,
-  useTransaction,
 } from "@starknet-react/core";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
-import React, { ReactElement, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import BN from "bn.js";
-import { ec, GetTransactionResponse, hash } from "starknet";
+import { ec, hash } from "starknet";
 import Button from "@/components/UI/button";
 import SelectIdentity from "@/components/selectIdentity";
 import Connect from "@/components/connection/connect";
 import styles from "@/styles/minting.module.css";
 import sbt_abi from "@/abi/starknet/sbt_abi.json";
 import { TextField } from "@mui/material";
-import LoadingScreen from "@/components/UI/screens/loadingScreen";
 import MintingPageSkeleton from "@/components/mintingPageSkeleton";
 
 type MetadataProps = {
@@ -31,13 +29,9 @@ type CallDataProps = {
   entrypoint: string;
 };
 
-type TransactionDatas = {
-  status: string;
-};
-
 const SbtMintingPage: NextPage = () => {
   const router = useRouter();
-  const { SbtAddress } = router.query;
+  const { SbtMintingPage: SbtAddress } = router.query;
 
   const { account, address } = useAccount();
   const [contractAddress, setContractAddress] = useState<string>("");
@@ -46,16 +40,7 @@ const SbtMintingPage: NextPage = () => {
   const [password, setPassword] = useState<string>("");
   const [sbtData, setSbtData] = useState<MetadataProps>();
   const [callData, setCallData] = useState<CallDataProps[]>();
-  const [element, setElement] = useState<ReactElement | null>(null);
-  const [loadingMessage, setLoadingMessage] = useState<string>("");
   const [clickedMint, setClickedMint] = useState<boolean>(false);
-  const [transactionHash, setTransactionHash] = useState<string>("");
-  const [finalStep, setFinalStep] = useState<boolean>(false);
-  const {
-    data: transactionData,
-    loading: transactionLoading,
-    error: transactionError,
-  } = useTransaction({ hash: transactionHash });
 
   const { execute } = useStarknetExecute({
     calls: callData,
@@ -78,26 +63,6 @@ const SbtMintingPage: NextPage = () => {
   }, [SbtAddress]);
 
   useEffect(() => {
-    if (!loadingMessage) {
-      setElement(null);
-    } else {
-      setElement(<LoadingScreen message={loadingMessage} />);
-    }
-  }, [loadingMessage]);
-
-  useEffect(() => {
-    if (!transactionData || !clickedMint) return;
-    const status = (
-      transactionData as GetTransactionResponse & TransactionDatas
-    ).status;
-    setLoadingMessage(status);
-    if (status === "ACCEPTED_ON_L2" || status === "ACCEPTED_ON_L1") {
-      setLoadingMessage("");
-      setFinalStep(true);
-    }
-  }, [transactionData, transactionLoading, transactionError]);
-
-  useEffect(() => {
     if (!sbtData && data) {
       let dataUri = "";
       data[0].forEach((c: number) => {
@@ -116,11 +81,8 @@ const SbtMintingPage: NextPage = () => {
   });
 
   useEffect(() => {
-    if (account && clickedMint && callData && !finalStep) {
-      execute().then((tx) => {
-        setLoadingMessage((tx as any).code);
-        setTransactionHash(tx.transaction_hash);
-      });
+    if (account && clickedMint && callData && callData.length > 0) {
+      execute();
     }
   }, [callData, clickedMint]);
 
@@ -206,33 +168,18 @@ const SbtMintingPage: NextPage = () => {
           />
           <div className={styles.textSection}>
             {privateKey ? (
-              finalStep ? (
-                <>
-                  <h1 className={styles.title}>
-                    Your SBT was minted successfully
-                  </h1>
-                  <p className={styles.text}>
-                    <a
-                      href={`${process.env.NEXT_PUBLIC_STARKSCAN_LINK}/tx/${transactionHash}`}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      View transaction on Starkscan
-                    </a>
-                  </p>
-                </>
-              ) : (
-                <>
-                  <h1 className={styles.title}>It&apos;s almost done</h1>
-                  <div className={styles.identitySection}>
-                    <SelectIdentity
-                      tokenId={tokenId}
-                      changeTokenId={changeTokenId}
-                    />
-                    <Button onClick={updateCallData}>Mint my token</Button>
-                  </div>
-                </>
-              )
+              <>
+                <h1 className={styles.title}>It&apos;s almost done</h1>
+                <div className={styles.identitySection}>
+                  <SelectIdentity
+                    tokenId={tokenId}
+                    changeTokenId={changeTokenId}
+                  />
+                  <Button onClick={updateCallData} disabled={clickedMint}>
+                    Mint my token
+                  </Button>
+                </div>
+              </>
             ) : loading ? (
               <MintingPageSkeleton />
             ) : (
@@ -267,7 +214,6 @@ const SbtMintingPage: NextPage = () => {
           </div>
         </div>
         <Connect />
-        {element}
       </main>
     </>
   );
