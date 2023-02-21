@@ -23,9 +23,12 @@ export default function Home() {
               !address ? styles.blur : "",
             ].join(" ")}
           >
-            <div className={styles.formSideImage} />
+            <img
+              src="/visuals/sbtIllustration.webp"
+              className={styles.formSideImage}
+            />
             <div className={styles.formFields}>
-              <h1 className={styles.title}>sbtmaker</h1>
+              <h1 className={styles.title}>sbt maker</h1>
               {finalStep ? (
                 <Success transactionHash={transactionHash} />
               ) : !tokenURI ? (
