@@ -120,7 +120,7 @@ export function useDecodedSeveral(domains: BN[][]): string[] {
 
 export function useDomainFromAddress(address: string | BN | undefined): string {
   const { contract } = useNamingContract();
-  const { data, error } = useStarknetCall({
+  const { data } = useStarknetCall({
     contract,
     method: "address_to_domain",
     args: [address],

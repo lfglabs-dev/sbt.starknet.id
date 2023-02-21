@@ -1,5 +1,5 @@
 import styles from "@/styles/components/steps.module.css";
-import { FunctionComponent } from "react";
+import React, { FunctionComponent } from "react";
 
 type SuccessProps = {
   transactionHash: string;

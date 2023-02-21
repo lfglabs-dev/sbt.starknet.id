@@ -1,5 +1,5 @@
 import { TextField as TextFieldMUI } from "@mui/material";
-import { ChangeEvent, FunctionComponent } from "react";
+import React, { ChangeEvent, FunctionComponent } from "react";
 
 type TextFieldProps = {
   error?: boolean;
@@ -20,7 +20,6 @@ const TextField: FunctionComponent<TextFieldProps> = ({
   defaultValue,
   onChange,
   required,
-  ...props
 }) => {
   return (
     <TextFieldMUI
@@ -31,7 +30,7 @@ const TextField: FunctionComponent<TextFieldProps> = ({
       helperText={helperText}
       defaultValue={defaultValue}
       variant="outlined"
-      onChange={onChange || (() => {})}
+      onChange={onChange}
       color="secondary"
       required={required}
       key={label + defaultValue}

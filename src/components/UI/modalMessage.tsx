@@ -1,6 +1,5 @@
-import React from "react";
+import React, { FunctionComponent, ReactNode } from "react";
 import styles from "../../styles/components/wallets.module.css";
-import { FunctionComponent, ReactNode } from "react";
 import { Modal } from "@mui/material";
 
 type ModalMessageProps = {

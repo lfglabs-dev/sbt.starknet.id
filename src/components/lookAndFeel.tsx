@@ -1,6 +1,6 @@
 import styles from "@/styles/components/steps.module.css";
 import { useAccount } from "@starknet-react/core";
-import { FunctionComponent, ReactElement, useState } from "react";
+import React, { FunctionComponent, ReactElement, useState } from "react";
 import ErrorNotification from "./notifications/errorNotification";
 import SuccessNotification from "./notifications/successNotification copy";
 import WarningNotification from "./notifications/warningNotification";
@@ -49,7 +49,7 @@ const LookAndFeel: FunctionComponent<LookAndFeelProps> = ({
       return error("The selected file is not an image");
     const img = new Image();
     const _URL = window.URL || window.webkitURL;
-    var objectUrl = _URL.createObjectURL(file);
+    const objectUrl = _URL.createObjectURL(file);
     img.onload = () => {
       const width = img.width;
       const height = img.height;
